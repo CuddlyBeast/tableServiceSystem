@@ -20,8 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL,
     image: DataTypes.STRING
   }, {
+    underscored: true,
     sequelize,
-    modelName: 'Menu',
+    modelName: 'menu',
   });
   return Menu;
 };

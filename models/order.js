@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Order.belongsTo(models.User, { foreignKey: 'user_id' });
+      Order.belongsTo(models.Menu, { foreignKey: 'menu_id' });
     }
   }
   Order.init({
@@ -19,16 +20,26 @@ module.exports = (sequelize, DataTypes) => {
     menu_id: DataTypes.INTEGER,
     qty: DataTypes.INTEGER,
     price: DataTypes.DECIMAL,
-    date: DataTypes.DATE
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    }
   }, {
+    timestamps: true,
+    underscored: true,
     sequelize,
-    modelName: 'Order',
+    modelName: 'order',
   });
 
-  Order.associate = (models) => {
-    Order.belongsTo(models.User, { foreignKey: 'user_id' });
-    Order.belongsTo(models.Menu, { foreignKey: 'menu_id' });
-  };
-  
+  Menu.beforeCreate((menu, options) => {
+    menu.date = new Date();
+  });
+
+
+  Menu.beforeUpdate((menu, options) => {
+    menu.date = new Date();
+  });
+
   return Order;
 };
