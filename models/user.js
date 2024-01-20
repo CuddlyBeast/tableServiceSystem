@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 'use strict';
 const {
   Model
@@ -31,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     underscored: true,
     sequelize,
-    modelName: 'user',
+    modelName: 'User',
   });
   return User;
 };
+

@@ -3,6 +3,9 @@ const session = require("express-session");
 const passport = require("passport");
 const helmet = require("helmet");
 const cors = require("cors");
+const bodyParser = require('body-parser');
+authRoutes = require("./routes/authRoutes");
+menuRoutes = require("./routes/menuRoutes");
 
 const app = express();
 
@@ -24,11 +27,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+app.use('/api', authRoutes);
+app.use('/api', menuRoutes);
+
 app.get('/', (req,res,next) => {
     console.log('Hello, World');
 });
 
+const port = process.env.PORT || 3000;
 
-app.listen(3000, () => {
-    console.log("server running");
+app.listen(port, () => {
+    console.log(`server running on port ${port}`);
 })

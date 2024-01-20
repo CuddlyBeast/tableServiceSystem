@@ -1,15 +1,14 @@
-// controllers/authController.js
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
 const signUp = async (req, res) => {
   try {
-    const { username, password, email } = req.body;
+    const { name, mobile, address, email, password, payment_method } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
-      username,
+      name,
       mobile,
       address,
       email,
@@ -21,11 +20,13 @@ const signUp = async (req, res) => {
       message: 'User successfully registered',
       user: {
         id: newUser.id,
+        name: newUser.name,
         mobile: newUser.mobile,
         address: newUser.address,
         email: newUser.email,
-        username: newUser.username,
         payment_method: newUser.payment_method,
+        created_at: new Date(),
+        updated_at: new Date(),
       },
     });
   } catch (error) {
