@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      orderNum: {
+      order_num: {
         type: Sequelize.STRING
       },
       user_id: {
@@ -24,7 +24,12 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
-      date: {
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updated_at: {
+        allowNull: false,
         type: Sequelize.DATE
       }
     });

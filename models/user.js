@@ -19,7 +19,16 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING
-  }, {
+  },   
+  {
+    hooks: {
+      beforeCreate: async (user) => {
+        if (user.password) {
+          const salt = await bcrypt.genSalt(10);
+          user.password = await bcrypt.hash(user.password, salt);
+        }
+      },
+    },
     underscored: true,
     sequelize,
     modelName: 'user',

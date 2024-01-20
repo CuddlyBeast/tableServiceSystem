@@ -15,30 +15,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Order.init({
-    orderNum: DataTypes.STRING,
+    order_num: DataTypes.STRING,
     user_id: DataTypes.INTEGER,
     menu_id: DataTypes.INTEGER,
     qty: DataTypes.INTEGER,
     price: DataTypes.DECIMAL,
-    date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    }
   }, {
     timestamps: true,
     underscored: true,
     sequelize,
     modelName: 'order',
-  });
-
-  Menu.beforeCreate((menu, options) => {
-    menu.date = new Date();
-  });
-
-
-  Menu.beforeUpdate((menu, options) => {
-    menu.date = new Date();
   });
 
   return Order;

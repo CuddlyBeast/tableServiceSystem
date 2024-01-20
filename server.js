@@ -24,6 +24,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+app.get('/', (req,res,next) => {
+    console.log('Hello, World');
+});
 
 
 app.listen(3000, () => {
