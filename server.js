@@ -6,6 +6,7 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 authRoutes = require("./routes/authRoutes");
 menuRoutes = require("./routes/menuRoutes");
+orderRoutes = require("./routes/orderRoutes");
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(passport.session());
 
 app.use('/api', authRoutes);
 app.use('/api', menuRoutes);
+app.use('/api', orderRoutes);
 
 app.get('/', (req,res,next) => {
     console.log('Hello, World');

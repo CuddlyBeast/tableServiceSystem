@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     mobile: DataTypes.STRING,
     address: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    payment_method: DataTypes.STRING
   },   
   {
     hooks: {

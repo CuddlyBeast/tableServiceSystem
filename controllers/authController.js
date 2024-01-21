@@ -37,23 +37,33 @@ const signUp = async (req, res) => {
 
 const signIn = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ where: { username } });
+    const { email, password } = req.body;
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid email' });
     }
 
-    const token = jwt.sign({ userId: user.id }, 'hkdlspairjtmchswgqusdfpgkwpdfu', { expiresIn: '1h' });
+    const isPasswordValid = await bcrypt.compare(password, user.password); //always false with await. both params correct.
+    console.log(isPasswordValid)
+    // without await user can sign in with incorrect password as long as they know the email address need to fix.
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid password' });
+    }
+
+    const token = jwt.sign({ id: user.id }, 'hkdlspairjtmchswgqusdfpgkwpdfu', { expiresIn: '1h' });
 
     res.json({
       message: 'Login successful',
       token,
     });
   } catch (error) {
-    console.error(error);
+    console.error('Error in sign in', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 
 module.exports = { signUp, signIn };
