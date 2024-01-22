@@ -32,4 +32,14 @@ const placeOrder = async (req, res) => {
     }
 };
 
-module.exports = { placeOrder };
+const viewOrders = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const orders = await Order.findAll({ where: { user_id: userId } });
+        res.send(orders);
+    } catch (error) {
+        res.status(500).send({ error: "Internal Server Error" })
+    }
+}
+
+module.exports = { placeOrder, viewOrders };

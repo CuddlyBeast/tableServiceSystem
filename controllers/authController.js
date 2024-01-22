@@ -45,7 +45,7 @@ const signIn = async (req, res) => {
       return res.status(401).json({ error: 'Invalid email' });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password); //always false with await. both params correct.
+    const isPasswordValid = bcrypt.compare(password, user.password); //always false with await. both params correct.
     console.log(isPasswordValid)
     // without await user can sign in with incorrect password as long as they know the email address need to fix.
 
