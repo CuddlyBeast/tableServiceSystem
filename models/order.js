@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     menu_id: DataTypes.INTEGER,
     qty: DataTypes.INTEGER,
     price: DataTypes.DECIMAL,
+    paid: DataTypes.BOOLEAN,
+    paid_with: DataTypes.STRING
   }, {
     timestamps: true,
     underscored: true,

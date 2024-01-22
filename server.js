@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 authRoutes = require("./routes/authRoutes");
 menuRoutes = require("./routes/menuRoutes");
 orderRoutes = require("./routes/orderRoutes");
+paymentRoutes = require("./routes/paymentRoutes");
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(passport.session());
 app.use('/api', authRoutes);
 app.use('/api', menuRoutes);
 app.use('/api', orderRoutes);
+app.use("/api", paymentRoutes);
 
 app.get('/', (req,res,next) => {
     console.log('Hello, World');
