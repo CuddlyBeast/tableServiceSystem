@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
+const bcrypt = require('bcrypt');
 
 const signUp = async (req, res) => {
   try {
@@ -40,6 +40,7 @@ const signIn = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ where: { email } });
+    console.log(user)
 
     if (!user) {
       return res.status(401).json({ error: 'Invalid email' });

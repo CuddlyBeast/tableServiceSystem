@@ -1,9 +1,18 @@
 const { Order, sequelize } = require("../models");
+const validator = require('validator');
 
 const provideReceipt = async (req, res) => {
     try {
         const orderId = req.params.id;
         const userId = req.user.id;
+
+        if (!validator.isInt(orderId, { min: 1 })) {
+          return res.status(400).send({ error: 'Invalid order ID'});
+        }
+
+        if(!validator.isInt(userId, { min: 1 } )) {
+          return res.status(400).send({ error: "Invalid user ID"});
+        }
 
         const result = await Order.findOne({  
             attributes: [
