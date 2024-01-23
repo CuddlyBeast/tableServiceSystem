@@ -10,10 +10,6 @@ const provideReceipt = async (req, res) => {
           return res.status(400).send({ error: 'Invalid order ID'});
         }
 
-        if(!validator.isInt(userId, { min: 1 } )) {
-          return res.status(400).send({ error: "Invalid user ID"});
-        }
-
         const result = await Order.findOne({  
             attributes: [
             'order_num',
