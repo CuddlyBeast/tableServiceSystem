@@ -2,9 +2,10 @@ const { Order } = require("../models");
 
 const confirmOrder = async (req, res) => {
     try {
-        const { order_num, payment_method } = req.body;
+        const { payment_method } = req.body;
         const defaultPayment = req.user.payment_method;
         const userId = req.user.id;
+        const orderId = req.params.id;
 
         const [numUpdatedRows, updatedOrders] = await Order.update(
             {
@@ -15,7 +16,7 @@ const confirmOrder = async (req, res) => {
                 where: {
                     user_id: userId,
                     paid: false,
-                    order_num: order_num,
+                    order_num: orderId,
                 },
                 returning: true, 
             }

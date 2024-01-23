@@ -5,6 +5,6 @@ const { confirmOrder } = require("../controllers/paymentController");
 
 const router = express.Router();
 
-router.post("/order/payment", authenticateUser, confirmOrder);
+router.put("/order/payment/:id", authenticateUser, confirmOrder);
 
 module.exports = router;

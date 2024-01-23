@@ -3,17 +3,18 @@ const session = require("express-session");
 const passport = require("passport");
 const helmet = require("helmet");
 const cors = require("cors");
-const bodyParser = require('body-parser');
 authRoutes = require("./routes/authRoutes");
 menuRoutes = require("./routes/menuRoutes");
 orderRoutes = require("./routes/orderRoutes");
 paymentRoutes = require("./routes/paymentRoutes");
+receiptRoutes = require("./routes/receiptRoutes");
 
 const app = express();
 
 app.use(express.json()); 
 app.use(cors());
 app.use(helmet()); 
+
 
 app.use(session({
     secret: 'hkdlspairjtmchswgqusdfpgkwpdfu',
@@ -33,6 +34,7 @@ app.use('/api', authRoutes);
 app.use('/api', menuRoutes);
 app.use('/api', orderRoutes);
 app.use("/api", paymentRoutes);
+app.use("/api", receiptRoutes);
 
 app.get('/', (req,res,next) => {
     console.log('Hello, World');
