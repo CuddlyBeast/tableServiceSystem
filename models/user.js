@@ -1,5 +1,3 @@
-const bcrypt = require('bcrypt');
-
 'use strict';
 const {
   Model
@@ -24,14 +22,6 @@ module.exports = (sequelize, DataTypes) => {
     payment_method: DataTypes.STRING
   },   
   {
-    hooks: {
-      beforeCreate: async (user) => {
-        if (user.password) {
-          const salt = await bcrypt.genSalt(10);
-          user.password = await bcrypt.hash(user.password, salt);
-        }
-      },
-    },
     underscored: true,
     sequelize,
     modelName: 'User',
