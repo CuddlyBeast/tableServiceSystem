@@ -1,11 +1,25 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
+const validator = require("validator");
+
 
 const signUp = async (req, res) => {
   try {
     const { name, mobile, address, email, password, payment_method } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const validationOptions = {
+      minLength: 8,
+      minLowerCase: 1,
+      minUpperCase: 1,
+      minNumber: 1,
+      returnScore: false,
+    };
+
+    if (!validator.isStrongPassword(password, validationOptions)) {
+      return res.status(400).send({ error: "Weak password. Must be at least 8 characters long including lowercase, uppercase and numeric values."})
+    }
 
     const newUser = await User.create({
       name,
