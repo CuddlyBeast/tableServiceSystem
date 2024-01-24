@@ -1,4 +1,5 @@
 const { Order } = require("../models");
+const validator = require('validator');
 
 const placeOrder = async (req, res) => {
     try {
@@ -52,6 +53,10 @@ const deleteOrder = async (req, res) => {
     try {
         const order = req.params.id;
         const userId = req.user.id
+
+        if (!validator.isInt(order, { min: 1 })) {
+            return res.status(400).send({ error: 'Invalid order ID'});
+          }
         
         Order.destroy({ where: { order_num: order, user_id: userId }});
         res.send({ message: `Order number ${order} has been deleted.`});

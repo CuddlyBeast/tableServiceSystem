@@ -1,4 +1,5 @@
 const { Order } = require("../models");
+const validator = require('validator');
 
 const confirmOrder = async (req, res) => {
     try {
@@ -6,6 +7,10 @@ const confirmOrder = async (req, res) => {
         const defaultPayment = req.user.payment_method;
         const userId = req.user.id;
         const orderId = req.params.id;
+
+        if (!validator.isInt(orderId, { min: 1 })) {
+            return res.status(400).send({ error: 'Invalid order ID'});
+          }
 
         const [numUpdatedRows, updatedOrders] = await Order.update(
             {

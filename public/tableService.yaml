@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: Table Service System
+  description: >-
+    This table service system allows users to sign-up, sign-in. The user can
+    then view the menu and their orders. The user can order items, pay for them,
+    and recieve a receipt or the user can cancel their order.
+  contact:
+    email: jonathan_cudd@live.co.uk
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://null
+tags:
+  - name: API
+    description: Everything about the table service system
+paths:
+  /api/signup:
+    summary: creates a new user in the database
+    description: >-
+      Allows the customer to create a profile of their information in order to
+      use the application.
+    post:
+      summary: >-
+        Requires information from the user to create a profile for them in the
+        database.
+      description: >-
+        The user provides a name, address, and payment_method. As well as a
+        unique mobile number, email, and password. The function validates the
+        password making sure it is at least 8 characters long including
+        lowercase, uppercase, and numeric values. The function then hashes the
+        password and the information in stored in the database. If the new user
+        creation is successful the user will be notified.
+      operationId: sign_up
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - authRoute
+  /api/signin:
+    summary: >-
+      Allows the user to retrieve access their account and perform actions in
+      the application.
+    description: >-
+      The user signs in with their unique email and password. If the information
+      is correct they will receive a JWT token that will allow them to interact
+      with their profile and the application.
+    post:
+      summary: >-
+        User provides their email and password gaining authorization to interact
+        with the application.
+      description: >-
+        The user provides their email and password. The functions checks if the
+        email and password is valid notifying the user which if any are
+        incorrect. If both are correct they are given a token for an hour and
+        notified as such so they can navigate through the application and
+        interact with its functions.
+      operationId: sign_in
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - authRoute
+  /api/menu:
+    summary: Allows user to view the menu
+    description: gets all of the items in the menus table of the database
+    get:
+      summary: User request to view the menu
+      description: >-
+        All entries in the menus table of the database are retrieved and shown
+        to the user.
+      operationId: get_menu
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - menuRoute
+  /api/order:
+    summary: The user picks items and confirms their order for the restaurant to view
+    description: >-
+      The user clarifies which menu item they want as well as the qty which
+      links to the price. The order_num and user_id are automatically provided. 
+      Once the order has been added they user is notified.
+    post:
+      summary: 'The user can order items to notify the restaurant. '
+      description: >-
+        The user_id is found through the JWT token and the order_num is
+        incremented by 1 from the latest order. The order_num keeps track of
+        which items(menu_id) are linked together, so the order in its entirety
+        can be linked to the user and distinguished between a previous order by
+        the same user. Additionally, there is an updated timestamp to help
+        distinguish between orders and their priority. Each order initially is
+        created with default columns of paid and paid_with which are set to
+        false and not applicable by default, respectively. 
+      operationId: post_order
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - orderRoute
+  /order/history:
+    summary: the user can view all of their orders.
+    description: Uses the JWT token to access the orders related to the given user_id.
+    get:
+      summary: Allows the user to view all of their previous orders
+      description: >-
+        The JWT token is accessed to evaluate who the user is and their previous
+        orders are shown to them.
+      operationId: order_history
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - orderRoute
+  /api/order/delete/:id:
+    summary: Use to delete a single order.
+    description: >-
+      Use to delete a single order related to the given user and identified by
+      its order_num.
+    delete:
+      summary: >-
+        Specify an order_num that correlates to the user's profile and delete
+        that order.
+      description: >-
+        The order is specified in the url params and the user is obtained
+        through the JWT token. The function uses the order and user id to target
+        the given order deleting each and every item related to that order_num.
+        The function then returns a message which states which order has been
+        deleted.
+      operationId: order_delete_:id
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - orderRoute
+  /api/order/payment/:id:
+    summary: User can pay for their order by given order_num(id).
+    description: >-
+      Enables user to pay for their specified order so that the restaurant can
+      begin preparing their food.
+    put:
+      summary: >-
+        Changes the paid column to true and updates the paid_with column to the
+        given payment method. 
+      description: >-
+        The payment method can be specified in the request if not it will
+        default to the payment method linked to the user's profile. The user is
+        retrieved with the JWT token and the order_num is provided through the
+        url param. If no order is found or that order has already been paid for
+        the user will be notified. Otherwise, the payment is successful
+        resulting in the user's notification of the payments success and the
+        order_num that was updated.
+      operationId: order_payment_:id
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - orderRoute
+  /order/receipt/:id:
+    summary: The user receives a receipt based on the given order_num.
+    description: >-
+      If the order is found the user receives a message notifying them of the
+      routes success, the order_num, and the total price of the order.
+    get:
+      summary: >-
+        Gives the user information regarding the order_num and the orders total
+        price.
+      description: >-
+        The user is retrieved through the JWT token and the order is retrieved
+        through the url params. The total of the order's price is tallied by
+        running the SQL method SUM on the price column. If the order exists then
+        the receipt is generated notifying the user, displaying the order_num
+        and total price.
+      operationId: order_receipt_:id
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - orderRoute

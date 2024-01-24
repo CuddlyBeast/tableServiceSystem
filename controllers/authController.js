@@ -72,7 +72,6 @@ const signIn = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error('Error in sign in', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
