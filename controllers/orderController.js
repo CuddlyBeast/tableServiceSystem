@@ -1,3 +1,4 @@
+const { or } = require("sequelize");
 const { Order } = require("../models");
 
 const placeOrder = async (req, res) => {
@@ -42,4 +43,16 @@ const viewOrders = async (req, res) => {
     }
 }
 
-module.exports = { placeOrder, viewOrders };
+const deleteOrder = async (req, res) => {
+    try {
+        const order = req.params.id;
+        const userId = req.user.id
+        
+        Order.destroy({ where: { order_num: order, user_id: userId }});
+        res.send({ message: `Order number ${order} has been deleted.`});
+    } catch (error) {
+        res.status(500).send({ error: "Internal Server Error" });
+    }
+}
+
+module.exports = { placeOrder, viewOrders, deleteOrder };
