@@ -29,7 +29,6 @@ const placeOrder = async (req, res) => {
             menu_id: newOrder.menu_id,
             qty: newOrder.qty, 
             price: newOrder.price,
-            created_at: new Date(),
             updated_at: new Date(),
             }
         })

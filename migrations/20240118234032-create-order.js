@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       order_num: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       user_id: {
         type: Sequelize.INTEGER
@@ -23,10 +23,6 @@ module.exports = {
       },
       price: {
         type: Sequelize.DECIMAL
-      },
-      created_at: {
-        allowNull: false,
-        type: Sequelize.DATE
       },
       updated_at: {
         allowNull: false,

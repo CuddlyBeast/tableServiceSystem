@@ -40,7 +40,6 @@ const signUp = async (req, res) => {
         address: newUser.address,
         email: newUser.email,
         payment_method: newUser.payment_method,
-        created_at: new Date(),
         updated_at: new Date(),
       },
     });
