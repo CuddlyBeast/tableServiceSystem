@@ -1,13 +1,19 @@
-const { or } = require("sequelize");
 const { Order } = require("../models");
 
 const placeOrder = async (req, res) => {
     try {
         const { order_num, user_id, menu_id, qty, price } = req.body; 
         const userId = req.user.id;
+        
+        const latestOrder = await Order.findOne({
+            attributes: ['order_num'],
+            order: [['order_num', 'DESC']],
+        })
+
+        const newOrderNum = latestOrder ? parseInt(latestOrder.order_num, 10) + 1 : 1; // order_num originally set as a string
 
         const newOrder = await Order.create({
-            order_num,
+            order_num: newOrderNum,
             user_id: userId,
             menu_id,
             qty,
