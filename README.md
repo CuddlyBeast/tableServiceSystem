@@ -4,7 +4,7 @@ ___
 
 ![Chinese Food](./images/israel-albornoz--SsC5Fpp-9o-unsplash.jpg "Yummy")
 > Part of the secret of success in life is to eat what you like and let the food fight it out inside.
-Mark Twain
+-Mark Twain
 
 ## Project Description 
 
