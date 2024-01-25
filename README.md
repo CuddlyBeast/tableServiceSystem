@@ -3,7 +3,7 @@
 ___
 
 ![Chinese Food](israel-albornoz--SsC5Fpp-9o-unsplash.jpg "Yummy")
-> Part of the secret of a success in life is to eat what you like and let the food fight it out inside.
+> Part of the secret of success in life is to eat what you like and let the food fight it out inside.
 Mark Twain
 
 ## Project Description 
@@ -45,4 +45,4 @@ The goal was to create a minimalistic application That would enable users to ord
 ### License
 
 **GPL license**
-:smiley:
+:joy:
