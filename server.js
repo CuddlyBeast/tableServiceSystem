@@ -1,6 +1,5 @@
 const express = require("express");
 const session = require("express-session");
-const passport = require("passport");
 const helmet = require("helmet");
 const cors = require("cors");
 authRoutes = require("./routes/authRoutes");
@@ -24,10 +23,6 @@ app.use(session({
     sameSite: 'none',
     secure: false,
 }));
-
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 app.use('/api', authRoutes);
