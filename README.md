@@ -45,4 +45,4 @@ The goal was to create a minimalistic application That would enable users to ord
 ### License
 
 **GPL license**
-:joy:
+:smiley:
