@@ -8,6 +8,8 @@ orderRoutes = require("./routes/orderRoutes");
 paymentRoutes = require("./routes/paymentRoutes");
 receiptRoutes = require("./routes/receiptRoutes");
 
+require("dotenv").config();
+
 const app = express();
 
 app.use(express.json()); 
