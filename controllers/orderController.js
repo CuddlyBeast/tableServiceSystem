@@ -19,6 +19,7 @@ const placeOrder = async (req, res) => {
             menu_id,
             qty,
             price,
+            updated_at: new Date(),
         });
 
         res.json({

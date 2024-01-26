@@ -21,9 +21,10 @@ module.exports = (sequelize, DataTypes) => {
     qty: DataTypes.INTEGER,
     price: DataTypes.DECIMAL,
     paid: DataTypes.BOOLEAN,
-    paid_with: DataTypes.STRING
+    paid_with: DataTypes.STRING,
+    updated_at: DataTypes.DATE
   }, {
-    timestamps: true,
+    timestamps:false,
     underscored: true,
     sequelize,
     modelName: 'Order',

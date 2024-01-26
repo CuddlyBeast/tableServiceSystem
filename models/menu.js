@@ -18,8 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     detail: DataTypes.TEXT,
     price: DataTypes.DECIMAL,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
+    updated_at: DataTypes.DATE
   }, {
+    timestamps:false,
     underscored: true,
     sequelize,
     modelName: 'Menu',

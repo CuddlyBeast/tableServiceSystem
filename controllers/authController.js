@@ -29,6 +29,7 @@ const signUp = async (req, res) => {
       email,
       password: hashedPassword,
       payment_method,
+      updated_at: new Date(),
     });
 
     res.json({
