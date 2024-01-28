@@ -17,6 +17,8 @@ app.use(cors());
 app.use(helmet()); 
 
 
+const store = new session.MemoryStore();
+
 app.use(session({
     secret: 'hkdlspairjtmchswgqusdfpgkwpdfu',
     cookie: { maxAge: 7280000, httpOnly: true, sameSite: 'none', secure: false },
@@ -24,6 +26,7 @@ app.use(session({
     saveUninitialized: false,
     sameSite: 'none',
     secure: false,
+    store,
 }));
 
 app.use('/api', authRoutes);
@@ -35,6 +38,11 @@ app.use("/api", receiptRoutes);
 app.get('/', (req,res,next) => {
     console.log('Hello, World');
 });
+
+app.get("/clearCart", (req, res) => {
+    req.session.cart = {}
+    res.redirect("/menu");
+  });
 
 const port = process.env.PORT || 3000;
 
