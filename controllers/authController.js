@@ -77,7 +77,17 @@ const signIn = async (req, res) => {
   }
 };
 
-module.exports = { signUp, signIn };
+const logout = async (req, res) => {
+  try {
+    req.logout();
+    res.redirect("/menu");
+  } catch (error) {
+    res.status(500).send({ error: 'Internal Server Error' });
+  }
+};
+
+
+module.exports = { signUp, signIn, logout };
 
 
 

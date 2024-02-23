@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const helmet = require("helmet");
 const cors = require("cors");
+const path = require("path");
 authRoutes = require("./routes/authRoutes");
 menuRoutes = require("./routes/menuRoutes");
 orderRoutes = require("./routes/orderRoutes");
@@ -14,8 +15,18 @@ const app = express();
 
 app.use(express.json()); 
 app.use(cors());
-app.use(helmet()); 
+app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://unpkg.com/", "https://code.jquery.com"],
+        connectSrc: ["'self'", "https://unpkg.com/"],
+      },
+    })
+  );
+  
 
+app.use(express.static(path.join(__dirname, "public"))); 
 
 const store = new session.MemoryStore();
 
@@ -35,8 +46,8 @@ app.use('/api', orderRoutes);
 app.use("/api", paymentRoutes);
 app.use("/api", receiptRoutes);
 
-app.get('/', (req,res,next) => {
-    console.log('Hello, World');
+app.get('/', (req, res, next) => {
+    res.sendFile(path.join(__dirname, "public", "index.html")); // Serve the index.html file
 });
 
 app.get("/clearCart", (req, res) => {
