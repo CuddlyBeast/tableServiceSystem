@@ -178,15 +178,15 @@ function renderCart() {
     document.querySelector('.listCard').innerHTML = cartHtml;
 }
 
-// function changeQuantity(key, quantity) {
-//     if (quantity === 0) {
-//         delete listCard[key]
-//     } else {
-//         listCard[key].quantity = quantity
-//         listCard[key].price = quantity * listCard[key].price
-//     }
-//     reloadCart()
-// }
+function changeQuantity(key, quantity) {
+    if (quantity === 0) {
+        delete listCard[key]
+    } else {
+        listCard[key].quantity = quantity
+        listCard[key].price = quantity * listCard[key].price
+    }
+    reloadCart()
+}
 
 
 

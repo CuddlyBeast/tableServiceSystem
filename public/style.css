@@ -161,6 +161,7 @@ header .shopping span {
 }
 
 .card{
+    overflow-y: auto;
     position: fixed;
     top: 0;
     left: 100%;
@@ -182,7 +183,7 @@ header .shopping span {
 
 .card .checkOut{
     position: absolute;
-    bottom: 0;
+    bottom: auto;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
