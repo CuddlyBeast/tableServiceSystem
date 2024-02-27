@@ -79,12 +79,19 @@ const signIn = async (req, res) => {
 
 const logout = async (req, res) => {
   try {
-    req.logout();
-    res.redirect("/menu");
+    // Clear the session data
+    req.session.destroy((err) => {
+      if (err) {
+        res.status(500).send({ error: 'Internal Server Error' });
+      } else {
+        res.status(200).send({ message: "Logout Successful" })
+      }
+    });
   } catch (error) {
     res.status(500).send({ error: 'Internal Server Error' });
   }
 };
+
 
 
 module.exports = { signUp, signIn, logout };

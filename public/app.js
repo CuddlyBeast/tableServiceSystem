@@ -84,25 +84,27 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     logout.addEventListener('click', async function(event) {
         event.preventDefault(); // Prevent default form submission
-
+    
         try {
-            // Send POST request to backend
+            // Send GET request to logout endpoint
             const response = await fetch('http://localhost:3000/api/logout', {
                 method: 'GET'
             });
-
+    
             // Check if response is successful
-            if (!response.ok) {
-                throw new Error('Logout failed'); // Throw error if response is not OK
+            if (response.ok) {
+                // Redirect to index.html upon successful logout
+                window.location.href = "/";
+            } else {
+                // Handle logout failure
+                throw new Error('Logout failed');
             }
-
-            // Redirect to index.html upon successful login
-            window.location.href = '/';
         } catch (error) {
             // Handle error
-            console.error('Login Error:', error);
+            console.error('Logout Error:', error);
         }
     });
+    
 
 });
 
