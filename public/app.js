@@ -68,6 +68,8 @@ closeShopping.addEventListener('click', () => {
 // Fetching data from API
 
 document.addEventListener('DOMContentLoaded', async function() {
+    const logout = document.getElementById('logout');
+
     try {
         const response = await fetch('http://localhost:3000/api/menu');
         if (!response.ok) {
@@ -79,6 +81,29 @@ document.addEventListener('DOMContentLoaded', async function() {
     } catch (error) {
         console.error('Error:', error);
     }
+
+    logout.addEventListener('click', async function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        try {
+            // Send POST request to backend
+            const response = await fetch('http://localhost:3000/api/logout', {
+                method: 'GET'
+            });
+
+            // Check if response is successful
+            if (!response.ok) {
+                throw new Error('Logout failed'); // Throw error if response is not OK
+            }
+
+            // Redirect to index.html upon successful login
+            window.location.href = '/';
+        } catch (error) {
+            // Handle error
+            console.error('Login Error:', error);
+        }
+    });
+
 });
 
 function displayTableServiceData(data) {

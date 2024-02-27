@@ -20,32 +20,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('login-form');
     const registrationForm = document.getElementById('registration-form');
 
-    // Add event listener for login form submission
-    loginForm.addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        // Get form data
-        const formData = new FormData(loginForm);
-
+    // Function to handle login
+    const handleLogin = async (email, password) => {
         try {
             // Send POST request to backend
             const response = await fetch('http://localhost:3000/api/signin', {
                 method: 'POST',
-                body: formData
+                body: JSON.stringify({ email, password }),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
             });
 
             // Check if response is successful
-            if (!response.ok) {
-                throw new Error('Login failed'); // Throw error if response is not OK
-            }
+            if (response.ok) {
+                // Parse the response JSON
+                const data = await response.json();
 
-            // Redirect to index.html upon successful login
-            window.location.href = '/index.html';
+                // Store the JWT token securely (e.g., in local storage)
+                localStorage.setItem('token', data.token);
+
+                // Redirect to index.html upon successful login
+                window.location.href = '/index.html';
+            } else {
+                throw new Error('Login failed');
+            }
         } catch (error) {
             // Handle error
             console.error('Login Error:', error);
         }
+    };
+
+    // Add event listener for login form submission
+    loginForm.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get email and password from the form
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Call the handleLogin function
+        handleLogin(email, password);
     });
+
+
 
     // Add event listener for registration form submission
     registrationForm.addEventListener('submit', async function(event) {
@@ -76,5 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Handle error
             console.error('Registration Error:', error);
         }
-    });    
+    });   
+
 });

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
-    --primaryColor: #0e6253; 
+    --primaryColor: #0e6253;
     --secondaryColor: #ffc107;
     --whiteColor: #fff;
     --blackColor: #222;
@@ -40,10 +40,11 @@ body {
 
 .sidebar-menus {
     display: flex;
-    flex-direction: column;   
+    flex-direction: column;
 }
 
-.sidebar-menus a , .sidebar-logout a {
+.sidebar-menus a,
+.sidebar-logout a {
     padding: 5% 8%;
     margin: 0.5rem 0;
     display: flex;
@@ -54,11 +55,13 @@ body {
     color: var(--whiteColor);
 }
 
-.sidebar-menus a ion-icon , .sidebar-logout a ion-icon {
+.sidebar-menus a ion-icon,
+.sidebar-logout a ion-icon {
     font-size: 20px;
 }
 
-.sidebar-menus a:hover , .sidebar-logout a:hover {
+.sidebar-menus a:hover,
+.sidebar-logout a:hover {
     background-color: var(--secondaryColor);
     border-radius: 50px;
 }
@@ -125,7 +128,8 @@ body {
 
 
 
-.cart, .user {
+.cart,
+.user {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,11 +142,12 @@ body {
     border-radius: 50%;
 }
 
-.cart:hover, .user:hover {
+.cart:hover,
+.user:hover {
     box-shadow: rgba(149, 157, 165, 0.2) 0px, 8px, 24px;
 }
 
-header .shopping{
+header .shopping {
     position: relative;
     text-align: right;
 }
@@ -160,7 +165,7 @@ header .shopping span {
     padding: 3px 10px;
 }
 
-.card{
+.card {
     /* overflow-y: auto; if more items are added option for scrolling */
     position: fixed;
     top: 0;
@@ -171,7 +176,7 @@ header .shopping span {
     transition: 0.2s ease;
 }
 
-.card h1{
+.card h1 {
     color: var(--secondaryColor);
     font-weight: 100;
     margin: 0;
@@ -181,7 +186,7 @@ header .shopping span {
     align-items: center;
 }
 
-.card .checkOut{
+.card .checkOut {
     position: absolute;
     /* bottom: auto; if more items are added option for scrolling */
     bottom: 0;
@@ -190,11 +195,11 @@ header .shopping span {
     grid-template-columns: repeat(2, 1fr);
 }
 
-.card .checkOut .total{
+.card .checkOut .total {
     font-size: 17px;
 }
 
-.card .checkOut div{
+.card .checkOut div {
     background-color: var(--secondaryColor);
     width: 100%;
     height: 70px;
@@ -205,21 +210,21 @@ header .shopping span {
     cursor: pointer;
 }
 
-.card .checkOut div:nth-child(2){
+.card .checkOut div:nth-child(2) {
     background-color: var(--blackColor);
     color: var(--whiteColor);
 }
 
-.active .card{
+.active .card {
     left: calc(100% - 500px);
     z-index: 1;
 }
 
-.active .main{
+.active .main {
     transform: translateX(-200px);
 }
 
-.listCard li{
+.listCard li {
     display: grid;
     grid-template-columns: 100px repeat(3, 1fr);
     color: var(--whiteColor);
@@ -227,24 +232,24 @@ header .shopping span {
     margin-bottom: 20px;
 }
 
-.listCard li div{
+.listCard li div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.listCard li img{
+.listCard li img {
     width: 90%;
 }
 
-.listCard button{
+.listCard button {
     width: 12px;
     background-color: var(--greyColor);
     border: none;
     cursor: pointer;
 }
 
-.listCard .count{
+.listCard .count {
     margin: 0 10px;
 }
 
@@ -269,7 +274,7 @@ header .shopping span {
     font-size: 20px;
 }
 
-.white{
+.white {
     color: var(--whiteColor);
 }
 
@@ -277,11 +282,13 @@ header .shopping span {
     font-size: 24px;
 }
 
-.back, .next {
+.back,
+.next {
     cursor: pointer;
 }
 
-.back:hover , .next:hover {
+.back:hover,
+.next:hover {
     color: var(--primaryColor);
 }
 
@@ -344,11 +351,13 @@ header .shopping span {
     gap: 1rem;
 }
 
-.back-menus, .next-menus {
+.back-menus,
+.next-menus {
     cursor: pointer;
 }
 
-.back-menus:hover , .next-menus:hover {
+.back-menus:hover,
+.next-menus:hover {
     color: var(--primaryColor);
 }
 
@@ -388,7 +397,7 @@ header .shopping span {
 }
 
 .filter-card:hover {
-    background-color:  var(--primaryColor);
+    background-color: var(--primaryColor);
     color: var(--whiteColor);
 }
 
@@ -478,7 +487,7 @@ header .shopping span {
 
 /* Sign-up And Sign-in */
 
-.hero{
+.hero {
     height: 100%;
     width: 100%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("images/pexels-elevate-1267320.jpg");
@@ -490,7 +499,7 @@ header .shopping span {
     justify-content: center;
 }
 
-.wrapper{
+.wrapper {
     position: relative;
     width: 400px;
     height: 700px;
@@ -506,43 +515,43 @@ header .shopping span {
     transition: height .2s ease;
 }
 
-.wrapper.active{
+.wrapper.active {
     height: 820px;
 }
 
-.wrapper .form-box{
+.wrapper .form-box {
     width: 100%;
     padding: 40px;
 }
 
-.wrapper .form-box.login{
+.wrapper .form-box.login {
     transition: transform .18s ease;
     transform: translateX(0);
 }
 
-.wrapper.active .form-box.login{
+.wrapper.active .form-box.login {
     transition: none;
     transform: translateX(-400px);
 }
 
-.wrapper .form-box.register{
+.wrapper .form-box.register {
     position: absolute;
     transition: none;
     transform: translateX(400px);
 }
 
-.wrapper.active .form-box.register{
+.wrapper.active .form-box.register {
     transition: transform .18s ease;
     transform: translateX(0);
 }
 
-.form-box h2{
+.form-box h2 {
     font-size: 2em;
     color: var(--primaryColor);
     text-align: center;
 }
 
-.input-box{
+.input-box {
     position: relative;
     width: 100%;
     height: 50px;
@@ -550,7 +559,7 @@ header .shopping span {
     margin: 30px 0;
 }
 
-.input-box label{
+.input-box label {
     position: absolute;
     top: 50%;
     left: 5px;
@@ -563,11 +572,11 @@ header .shopping span {
 }
 
 .input-box input:focus~label,
-.input-box input:valid~label{
+.input-box input:valid~label {
     top: -5px;
 }
 
-.input-box input{
+.input-box input {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -579,7 +588,7 @@ header .shopping span {
     padding: 0 35px 0 5px;
 }
 
-.input-box .icon{
+.input-box .icon {
     position: absolute;
     right: 8px;
     font-size: 1.2em;
@@ -587,7 +596,7 @@ header .shopping span {
     line-height: 57px;
 }
 
-.remember-forgot{
+.remember-forgot {
     font-size: .9em;
     color: var(--primaryColor);
     font-weight: 500;
@@ -596,21 +605,21 @@ header .shopping span {
     justify-content: space-between;
 }
 
-.remember-forgot label input{
+.remember-forgot label input {
     accent-color: var(--primaryColor);
     margin-right: 3px;
 }
 
-.remember-forgot a{
+.remember-forgot a {
     color: var(--primaryColor);
     text-decoration: none;
 }
 
-.remember-forgot a:hover{
+.remember-forgot a:hover {
     text-decoration: underline;
 }
 
-.btn{
+.btn {
     width: 100%;
     height: 45px;
     background: var(--primaryColor);
@@ -623,7 +632,7 @@ header .shopping span {
     font-weight: 500;
 }
 
-.login-register{
+.login-register {
     font-size: .9em;
     color: var(--primaryColor);
     text-align: center;
@@ -631,13 +640,13 @@ header .shopping span {
     margin: 25px 0 10px;
 }
 
-.login-register p a{
+.login-register p a {
     color: var(--primaryColor);
     text-decoration: none;
     font-weight: 600;
 }
 
-.login-register p a:hover{
+.login-register p a:hover {
     text-decoration: underline;
 }
 
@@ -671,23 +680,23 @@ header .shopping span {
         z-index: 10;
     }
 
-    .highlight-card{
+    .highlight-card {
         min-width: 180px;
         width: 80%;
     }
 
-    .card h1{
+    .card h1 {
         padding: 0;
         flex-direction: column;
     }
-    
+
     .active .card {
         left: 0;
         width: 100%;
     }
 
     .active .main {
-        transform: translateX(0%); 
+        transform: translateX(0%);
     }
-    
+
 }
