@@ -55,7 +55,7 @@ let closeShopping = document.querySelector('.closeShopping');
 let total = document.querySelector('.total');
 let main = document.querySelector('.main');
 let quantity = document.querySelector('.quantity');
-let listCard = []; // Store item data in JavaScript array
+let listCard = []; 
 
 openShopping.addEventListener('click', () => {
     main.classList.add('active');
@@ -69,14 +69,12 @@ closeShopping.addEventListener('click', () => {
 
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        // Make API request to retrieve table service data
         const response = await fetch('http://localhost:3000/api/menu');
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
         const data = await response.json();
 
-        // Display table service data on the HTML page
         displayTableServiceData(data);
     } catch (error) {
         console.error('Error:', error);
@@ -84,7 +82,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 function displayTableServiceData(data) {
-    // Assuming data is an array of objects
     let tableDataHtml = '';
     let detailCardsHtml = '';
     data.forEach(item => {
@@ -114,13 +111,10 @@ function displayTableServiceData(data) {
             </div>`;
     });
 
-    // Update the content of the container div (e.g., detail-wrapper)
     document.querySelector('.detail-wrapper').innerHTML = detailCardsHtml;
 
-    // Update the content of the highlight-wrapper div
     document.querySelector('.highlight-wrapper').innerHTML = tableDataHtml;
 
-    // Add event listeners to the add-to-cart buttons
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', () => {
             addToCart(button);
@@ -153,7 +147,7 @@ function reloadCart() {
         itemCount += item.quantity;
     });
 
-    total.innerText = totalPrice.toLocaleString();
+    total.innerText = `$${totalPrice.toLocaleString()}`;
     quantity.innerText = itemCount;
 
     renderCart();
@@ -161,48 +155,46 @@ function reloadCart() {
 
 function renderCart() {
     let cartHtml = '';
-    listCard.forEach(item => {
+    listCard.forEach((item, index) => {
         cartHtml += `
             <li>
-                <div><img src="${item.image}"/></div>
+                <div><img class="highlight-img" src="${item.image}"/></div>
                 <div>${item.name}</div>
                 <div>$${(item.price * item.quantity).toLocaleString()}</div>
                 <div>
-                    <button onclick="changeQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                    <button class="quantity-change" data-index="${index}" data-change="-1">-</button>
                     <div class="count">${item.quantity}</div>
-                    <button onclick="changeQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                    <button class="quantity-change" data-index="${index}" data-change="1">+</button>
                 </div>
             </li>
         `;
     });
     document.querySelector('.listCard').innerHTML = cartHtml;
+
+    document.querySelectorAll('.quantity-change').forEach(button => {
+        button.addEventListener('click', () => {
+            handleQuantityChange(button)
+        });
+    });
 }
 
-function changeQuantity(key, quantity) {
-    if (quantity === 0) {
-        delete listCard[key]
-    } else {
-        listCard[key].quantity = quantity
-        listCard[key].price = quantity * listCard[key].price
+function handleQuantityChange(button) {
+    const index = parseInt(button.dataset.index);
+    const change = parseInt(button.dataset.change);
+    const newQuantity = listCard[index].quantity + change;
+    if (newQuantity >= 0) {
+        changeQuantity(index, newQuantity);
     }
-    reloadCart()
 }
 
 
+function changeQuantity(index, quantity) {
+    if (quantity === 0) {
+        listCard.splice(index, 1); 
+    } else {
+        listCard[index].quantity = quantity; 
+    }
+    reloadCart();
+}
 
 
-
-
-
-// function initApp(){
-//     products.forEach(item =>{
-//         let newDiv = document.createElement('div');
-//         newDiv.innerHTML = 
-//             `<img src="image/${item.image}"/>
-//             <div class="title">${item.name}</div>
-//             <div class="price">${item.price.toLocaleString()}</div>
-//             <button onclick="addToCard(${item}">Add To Cart</button>`
-//             ;
-//         main.appendChild(newDiv);
-//     })
-// }

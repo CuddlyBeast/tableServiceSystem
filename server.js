@@ -24,9 +24,8 @@ app.use(
       },
     })
   );
-  
 
-app.use(express.static(path.join(__dirname, "public"))); 
+
 
 const store = new session.MemoryStore();
 
@@ -40,20 +39,32 @@ app.use(session({
     store,
 }));
 
-app.use('/api', authRoutes);
-app.use('/api', menuRoutes);
-app.use('/api', orderRoutes);
-app.use("/api", paymentRoutes);
-app.use("/api", receiptRoutes);
 
 app.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, "public", "index.html")); // Serve the index.html file
+  res.sendFile(path.join(__dirname, "public", "authenticate.html"));
+});
+
+app.use(express.static(path.join(__dirname, "public"))); 
+
+app.get('/menu', (req, res, next) => {
+    res.sendFile(path.join(__dirname, "public", "index.html")); 
 });
 
 app.get("/clearCart", (req, res) => {
     req.session.cart = {}
     res.redirect("/menu");
   });
+
+  app.use('/api', authRoutes);
+  app.use('/api', menuRoutes);
+  app.use('/api', orderRoutes);
+  app.use("/api", paymentRoutes);
+  app.use("/api", receiptRoutes);
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something went wrong!');
+});
 
 const port = process.env.PORT || 3000;
 
