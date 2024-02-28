@@ -1,4 +1,4 @@
-// item Slider for highlight and menu category sections
+// Toggle for Sidebar
 
 const mobile = document.querySelector('.menu-toggle');
 const mobileLink = document.querySelector('.sidebar');
@@ -15,6 +15,9 @@ mobileLink.addEventListener("click", function(){
         mobileLink.classList.toggle("active");
     }
 });
+
+
+// item Slider for highlight and menu category sections
 
 let step = 100;
 let stepFilter = 60;

@@ -650,6 +650,154 @@ header .shopping span {
     text-decoration: underline;
 }
 
+/* Contact Page */
+
+#contact-body{
+    background: linear-gradient(var(--softGreenColor), var(--greyColor));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-container{
+    height: 100vH;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-right{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}
+
+.contact-right-title h2{
+    font-weight: 600;
+    color: var(--primaryColor);
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.contact-right-title hr{
+    border: none;
+    width: 120px;
+    height: 5px;
+    background-color: var(--primaryColor);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.contact-inputs{
+    width: 400px;
+    height: 50px;
+    border: none;
+    outline: none;
+    padding-left: 25px;
+    font-weight: 500;
+    color: var(--blackColor);
+    border-radius: 50px;
+}
+
+.contact-right textarea{
+    height: 140px;
+    padding-top: 15px;
+    border-radius: 20px;
+}
+
+.contact-inputs:focus{
+    border: 2px solid var(--secondaryColor);
+}
+
+.contact-inputs::placeholder{
+    color: var(--darkGreyColor);
+}
+
+.contact-right button{
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    font-size: 16px;
+    color: var(--whiteColor);
+    gap: 10px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(270deg, var(--primaryColor), var(--softGreenColor));
+    cursor: pointer;
+}
+
+.contact-right button img{
+    height: 15px;
+}
+
+.contact-right button:hover{
+    border: 2px solid var(--secondaryColor);
+}
+
+#contact-toggle {
+    position: fixed;
+    top: 20px; 
+    left: 20px; 
+    cursor: pointer;
+}
+
+.far-img {
+    position: absolute;
+    top: 0; 
+    right: 0; 
+}
+
+.far-img img{
+    width: 400px;
+}
+
+/* Contact Page Mobile */
+
+@media (max-width:1100px){
+
+    .contact-container{
+        width: 100%;
+    }
+
+    .contact-right{
+        width: 40vH;
+    }
+
+    .contact-inputs{
+        width: 40vH;
+    }
+
+    .far-img{
+        display: none;
+    }
+
+    .sidebar{
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: block;
+        text-decoration: none;
+        font-size: 20px;
+        background-color: var(--whiteColor);
+        color: var(--primaryColor);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+        height: 40px;
+        border-radius: 50%;
+        z-index: 3;
+    }
+
+    .sidebar.active {
+        display: flex;
+        z-index: 10;
+    }
+}
+
 /* mobile view */
 @media screen and (max-width:640px) {
     .sidebar {
