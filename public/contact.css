@@ -63,6 +63,10 @@
     border-radius: 50px;
 }
 
+.menu-toggle {
+    display: none;
+}
+
 
 #contact-body{
     background: linear-gradient(var(--softGreenColor), var(--greyColor));
@@ -208,4 +212,19 @@
         display: flex;
         z-index: 10;
     }
+}
+
+@media screen and (max-width:640px) {
+
+.payment-container form {
+    padding: 10px;
+    width: 40vH;
+    padding-top: 160px;
+}
+
+
+.payment-container .card-container{
+    width: 315px;
+}
+
 }
