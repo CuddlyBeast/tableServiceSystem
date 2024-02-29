@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL,
     paid: DataTypes.BOOLEAN,
     paid_with: DataTypes.STRING,
+    table_num: DataTypes.INTEGER,
+    address: DataTypes.STRING,
     updated_at: DataTypes.DATE
   }, {
     timestamps:false,

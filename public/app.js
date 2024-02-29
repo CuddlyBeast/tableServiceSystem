@@ -85,6 +85,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.error('Error:', error);
     }
 
+    // Logout
+
     logout.addEventListener('click', async function(event) {
         event.preventDefault(); // Prevent default form submission
     

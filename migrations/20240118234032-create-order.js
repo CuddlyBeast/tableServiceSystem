@@ -37,6 +37,14 @@ module.exports = {
         allowNull: false,
         defaultValue: "not applicable",
         type: Sequelize.STRING
+      },
+      table_num: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      address: {
+        type: Sequelize.STRING,
+        defaultValue: "n/a"
       }
     });
   },

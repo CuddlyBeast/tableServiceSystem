@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('login-form');
     const registrationForm = document.getElementById('registration-form');
 
-    // Function to handle login
+    // Login
     const handleLogin = async (email, password) => {
         try {
             // Send POST request to backend
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // Add event listener for registration form submission
+    // Registration
     registrationForm.addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent default form submission
         
@@ -87,13 +87,32 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     
             // Handle response
-            // Example: Convert response to JSON and log it
             const data = await response.json();
-            console.log('Registration Response:', data);
+            if (response.ok) {
+                // Registration successful
+                displayMessage('Registration successful!', true);
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 3000);
+            } else {
+                // Registration failed
+                displayMessage(`Registration failed`, false);
+            }
         } catch (error) {
             // Handle error
             console.error('Registration Error:', error);
         }
-    });   
+    });  
+    
+    function displayMessage(message, isSuccess) {
+        const messageContainer = document.getElementById('registration-message');
+        messageContainer.textContent = message;
+
+        if (isSuccess) {
+            messageContainer.style.color = 'green'; 
+        } else {
+            messageContainer.style.color = 'red'; 
+        }
+    }
 
 });

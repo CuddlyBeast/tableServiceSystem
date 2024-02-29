@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <title>Contact Page</title>
 </head>
@@ -13,11 +13,11 @@
     <div class="sidebar">
         <h1 class="logo">Glutton For Grub</h1>
         <div class="sidebar-menus">
-            <a href="index.html"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+            <a href="/menu"><ion-icon name="storefront-outline"></ion-icon>Home</a>
             <a href="#"><ion-icon name="receipt-outline"></ion-icon>Orders</a>
-            <a href="#"><ion-icon name="wallet-outline"></ion-icon>Wallet</a>
+            <a href="/payment"><ion-icon name="wallet-outline"></ion-icon>Payment</a>
             <a href="#"><ion-icon name="notifications-outline"></ion-icon>Notification</a>
-            <a href="contact.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+            <a href="/contact"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
             <a href="#"><ion-icon name="settings-outline"></ion-icon>Settings</a>
         </div>
         <div class="sidebar-logout">
@@ -28,11 +28,12 @@
     <ion-icon id="contact-toggle" class="menu-toggle" name="menu-outline"></ion-icon>
 
     <div class="contact-container">
-        <form action="" class="contact-right">
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-right">
             <div class="contact-right-title">
                 <h2>Get in touch</h2>
                 <hr>
             </div>
+            <input type="hidden" name="access_key" value="f242d71e-a659-4ac4-baa9-c70ccd040c58">
             <input type="text" name="name" placeholder="Your Name" class="contact-inputs" required>
             <input type="email" name="email" placeholder="Your Email" class="contact-inputs" required>
             <textarea name="message" placeholder="Your Message" class="contact-inputs" required></textarea>
@@ -41,7 +42,7 @@
     </div>
 
     <div class="far-img">
-        <img src="images/right_img.png" alt="">
+        <img src="images/bread.png" alt="">
     </div>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

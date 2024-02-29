@@ -650,153 +650,253 @@ header .shopping span {
     text-decoration: underline;
 }
 
-/* Contact Page */
+#registration-message{
+    text-align: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 600;
+}
 
-#contact-body{
+/* Payment Page */
+
+#payment-body{
     background: linear-gradient(var(--softGreenColor), var(--greyColor));
+    border: none;
+    text-decoration: none;
+    text-transform: uppercase;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.contact-container{
-    height: 100vH;
+.payment-container{
+    min-height: 100vH;
+    background: var(--whiteColor);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-flow: column;
+    padding-bottom: 60px;
 }
 
-.contact-right{
+.payment-container form{
+    background: var(--whiteColor);
+    border-radius: 5px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
+    padding: 20px;
+    width: 600px;
+    padding-top: 160px;
+}
+
+.payment-container form .inputBox{
+    margin-top: 20px;
+}
+
+.payment-container form .inputBox span{
+    display: block;
+    color: var(--darkGreyColor);
+    padding-bottom: 5px;
+}
+
+.payment-container form .inputBox input,
+.payment-container form .inputBox select{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    color: var(--blackColor);
+}
+
+.payment-container form .flexbox{
+    display: flex;
+    gap: 15px;
+}
+
+.payment-container form .flexbox .inputBox{
+    flex: 1 1 150px;
+}
+
+.payment-container form .submit-btn{
+    width: 100%;
+    background: linear-gradient(45deg, var(--primaryColor), var(--softGreenColor));
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    color: var(--whiteColor);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.payment-container form .submit-btn:hover{
+    letter-spacing: 2px;
+    opacity: .8;
+}
+
+.payment-container .card-container{
+    margin-bottom: -150px;
+    position: relative;
+    height: 250px;
     width: 400px;
+}
+
+.payment-container .card-container .front{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(45deg, var(--primaryColor), var(--softGreenColor));
+    border-radius: 5px;
+    backface-visibility: hidden;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+    padding: 20px;
+    transform: perspective(1000px) rotateY(0deg);
+    transition: transform .4s ease-out;
+}
+
+.payment-container .card-container .front .image{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.payment-container .card-container .front .image img{
+    height: 50px;
+}
+
+.payment-container .card-container .front .card-number-box{
+    padding: 30px 0;
+    font-size: 22px;
+    color: var(--whiteColor);
+}
+
+.payment-container .card-container .front .flexbox{
+    display: flex;
+}
+
+.payment-container .card-container .front .flexbox .box:nth-child(1){
+    margin-right: auto;
+}
+
+.payment-container .card-container .front .flexbox .box{
+    font-size: 15px;
+    color: var(--whiteColor);
+}
+
+.payment-container .card-container .back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(45deg, var(--primaryColor), var(--softGreenColor));
+    border-radius: 5px;
+    padding: 20px 0;
+    text-align: right;
+    backface-visibility: hidden;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+    transform: perspective(1000px) rotateY(180deg);
+    transition: transform .4s ease-out;
+}
+
+.payment-container .card-container .back .stripe{
+    background: var(--blackColor);
+    width: 100%;
+    margin: 10px 0;
+    height: 50px;
+}
+
+.payment-container .card-container .back .box{
+    padding: 0 20px;
+}
+
+.payment-container .card-container .back .box span{
+    color: var(--whiteColor);
+    font-size: 15px;
+}
+
+.payment-container .card-container .back .box .cvv-box{
+    height: 50px;
+    padding: 10px;
+    margin-top: 5px;
+    color: var(--darkGreyColor);
+    background: var(--whiteColor);
+    border-radius: 5px;
+    width: 100%;
+}
+
+.payment-container .card-container .back .box img{
+    margin-top: 30px;
+    height: 30px;
+}
+
+.payment-container form .inputRadio{
     display: flex;
     flex-direction: column;
-    align-items: start;
-    gap: 20px;
-}
+    gap: 15px;
 
-.contact-right-title h2{
-    font-weight: 600;
-    color: var(--primaryColor);
-    font-size: 40px;
-    margin-bottom: 5px;
-}
-
-.contact-right-title hr{
-    border: none;
-    width: 120px;
-    height: 5px;
-    background-color: var(--primaryColor);
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.contact-inputs{
-    width: 400px;
-    height: 50px;
-    border: none;
-    outline: none;
-    padding-left: 25px;
-    font-weight: 500;
-    color: var(--blackColor);
-    border-radius: 50px;
-}
-
-.contact-right textarea{
-    height: 140px;
+    border-radius: 15px;
     padding-top: 15px;
-    border-radius: 20px;
 }
 
-.contact-inputs:focus{
-    border: 2px solid var(--secondaryColor);
+.payment-container form .inputRadio::before{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 6px; 
+    background-color: var(--greyColor); 
+    border-radius: 5px;
 }
 
-.contact-inputs::placeholder{
+.payment-container form .inputRadio .radio-option label{
     color: var(--darkGreyColor);
 }
 
-.contact-right button{
+.payment-container form .inputRadio .radio-input label{
+    display: block;
+    color: var(--primaryColor);
+    padding-bottom: 5px;
+}
+
+.payment-container form .inputRadio .radio-input input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    color: var(--blackColor);
+}
+
+.payment-container form .checkout-total{
+    width: 100%;
+    background: linear-gradient(45deg, var(--softGreenColor), var(--primaryColor));
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    color: var(--whiteColor);
+    border-radius: 5px;
     display: flex;
     align-items: center;
-    padding: 15px 30px;
-    font-size: 16px;
-    color: var(--whiteColor);
-    gap: 10px;
-    border: none;
-    border-radius: 50px;
-    background: linear-gradient(270deg, var(--primaryColor), var(--softGreenColor));
-    cursor: pointer;
+    justify-content: center;
+    bottom: 20px;
+    margin-bottom: -18px;
 }
 
-.contact-right button img{
-    height: 15px;
+
+
+.return-button {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primaryColor); /* Change the color as needed */
+    font-size: 20px;
+    margin-top: 10px;
 }
 
-.contact-right button:hover{
-    border: 2px solid var(--secondaryColor);
+.return-button ion-icon {
+    margin-right: 5px; /* Adjust the spacing between the icon and text */
 }
 
-#contact-toggle {
-    position: fixed;
-    top: 20px; 
-    left: 20px; 
-    cursor: pointer;
-}
-
-.far-img {
-    position: absolute;
-    top: 0; 
-    right: 0; 
-}
-
-.far-img img{
-    width: 400px;
-}
-
-/* Contact Page Mobile */
-
-@media (max-width:1100px){
-
-    .contact-container{
-        width: 100%;
-    }
-
-    .contact-right{
-        width: 40vH;
-    }
-
-    .contact-inputs{
-        width: 40vH;
-    }
-
-    .far-img{
-        display: none;
-    }
-
-    .sidebar{
-        display: none;
-    }
-    
-    .menu-toggle {
-        display: block;
-        text-decoration: none;
-        font-size: 20px;
-        background-color: var(--whiteColor);
-        color: var(--primaryColor);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 10px;
-        height: 40px;
-        border-radius: 50%;
-        z-index: 3;
-    }
-
-    .sidebar.active {
-        display: flex;
-        z-index: 10;
-    }
-}
 
 /* mobile view */
 @media screen and (max-width:640px) {
@@ -845,6 +945,20 @@ header .shopping span {
 
     .active .main {
         transform: translateX(0%);
+    }
+
+    /* Payment Page */
+    
+
+    .payment-container form {
+        padding: 10px;
+        width: 40vH;
+        padding-top: 160px;
+    }
+
+
+    .payment-container .card-container{
+        width: 315px;
     }
 
 }

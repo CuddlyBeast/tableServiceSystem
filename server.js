@@ -50,6 +50,14 @@ app.get('/menu', (req, res, next) => {
     res.sendFile(path.join(__dirname, "public", "index.html")); 
 });
 
+app.get('/contact', (req, res, next) => {
+  res.sendFile(path.join(__dirname, "public", "contact.html")); 
+});
+
+app.get('/payment', (req, res, next) => {
+  res.sendFile(path.join(__dirname, "public", "payment.html")); 
+});
+
 app.get("/clearCart", (req, res) => {
     req.session.cart = {}
     res.redirect("/menu");

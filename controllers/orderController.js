@@ -3,7 +3,7 @@ const validator = require('validator');
 
 const placeOrder = async (req, res) => {
     try {
-        const { order_num, user_id, menu_id, qty, price } = req.body; 
+        const { order_num, user_id, menu_id, qty, price, table_num, address } = req.body; 
         const userId = req.user.id;
         
         const latestOrder = await Order.findOne({
@@ -19,6 +19,8 @@ const placeOrder = async (req, res) => {
             menu_id,
             qty,
             price,
+            table_num,
+            address,
             updated_at: new Date(),
         });
 
@@ -31,6 +33,8 @@ const placeOrder = async (req, res) => {
             menu_id: newOrder.menu_id,
             qty: newOrder.qty, 
             price: newOrder.price,
+            table_num: newOrder.table_num,
+            address: newOrder.address,
             updated_at: new Date(),
             }
         })
