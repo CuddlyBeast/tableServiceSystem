@@ -865,7 +865,8 @@ header .shopping span {
 }
 
 .payment-container form .item-container ul li div{
-    color: var(--blackColor);
+    color: var(--primaryColor);
+    font-size: 12px;
 }
 
 .payment-container form .inputRadio{
@@ -988,10 +989,6 @@ header .shopping span {
 
     .payment-container .card-container{
         width: 315px;
-    }
-
-    .payment-container form .item-container ul li div{
-        font-size: 12px;
     }
 
 }
