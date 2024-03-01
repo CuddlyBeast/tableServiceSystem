@@ -28,11 +28,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      paid: {
-        allowNull: false,
-        defaultValue: false,
-        type: Sequelize.BOOLEAN
-      },
       paid_with: {
         allowNull: false,
         defaultValue: "not applicable",

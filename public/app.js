@@ -53,12 +53,12 @@ $(".next-menus").bind("click", function(e){
 
 // Cart open and close
 
-let openShopping = document.querySelector('.shopping');
-let closeShopping = document.querySelector('.closeShopping');
-let total = document.querySelector('.total');
-let main = document.querySelector('.main');
-let quantity = document.querySelector('.quantity');
-let listCard = []; 
+const openShopping = document.querySelector('.shopping');
+const closeShopping = document.querySelector('.closeShopping');
+const total = document.querySelector('.total');
+const main = document.querySelector('.main');
+const quantity = document.querySelector('.quantity');
+const listCard = []; 
 
 openShopping.addEventListener('click', () => {
     main.classList.add('active');
@@ -179,8 +179,11 @@ function reloadCart() {
         itemCount += item.quantity;
     });
 
-    total.innerText = `$${totalPrice.toLocaleString()}`;
+    const formattedTotalPrice = totalPrice.toFixed(2).toLocaleString();
+
+    total.innerText = `$${formattedTotalPrice}`;
     quantity.innerText = itemCount;
+    localStorage.setItem('totalPrice', formattedTotalPrice)
 
     renderCart();
 }
@@ -192,7 +195,7 @@ function renderCart() {
             <li>
                 <div><img class="highlight-img" src="${item.image}"/></div>
                 <div>${item.name}</div>
-                <div>$${(item.price * item.quantity).toLocaleString()}</div>
+                <div>$${(item.price * item.quantity).toFixed(2).toLocaleString()}</div>
                 <div>
                     <button class="quantity-change" data-index="${index}" data-change="-1">-</button>
                     <div class="count">${item.quantity}</div>
@@ -230,3 +233,12 @@ function changeQuantity(index, quantity) {
 }
 
 
+// Order Button in Cart linking to Required Payment
+const onClickTotal = document.querySelector('.total');
+
+onClickTotal.addEventListener('click', () => {
+    window.location.href = '/payment';
+})
+
+
+// Transfer Total Sum of Cart to Payment Page (perhaps with the item id and quantity so that upon purchase the order database will update)

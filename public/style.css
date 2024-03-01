@@ -179,11 +179,14 @@ header .shopping span {
 .card h1 {
     color: var(--secondaryColor);
     font-weight: 100;
-    margin: 0;
+    margin: 10px;
     padding: 0 20px;
     height: 80px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid var(--secondaryColor);
+    border-radius: 15px;
 }
 
 .card .checkOut {
@@ -882,7 +885,9 @@ header .shopping span {
     margin-bottom: -18px;
 }
 
-
+.payment-container form .checkout-total .total{
+    text-transform: none;
+}
 
 .return-button {
     display: inline-flex;

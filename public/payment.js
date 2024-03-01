@@ -1,3 +1,11 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const totalPrice = localStorage.getItem('totalPrice');
+    if (totalPrice) {
+        // Display the total price wherever needed on the page
+        document.getElementById('totalPriceContainer').innerText = `Total (including vat): $${totalPrice.toLocaleString()}`;
+    }
+});
+
 const deliveryOption = document.getElementById('delivery');
 const tableOption = document.getElementById('table');
 const addressInput = document.querySelector('.address-input');
