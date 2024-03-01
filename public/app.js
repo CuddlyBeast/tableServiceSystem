@@ -168,6 +168,7 @@ function addToCart(button) {
         listCard.push({ id: itemId, name: itemName, image: itemImage, price: itemPrice, quantity: 1 });
     }
     reloadCart();
+    updateLocalStorage(); 
 }
 
 function reloadCart() {
@@ -188,6 +189,12 @@ function reloadCart() {
     renderCart();
 }
 
+
+function updateLocalStorage() {
+    localStorage.setItem('cartItems', JSON.stringify(listCard)); 
+}
+
+
 function renderCart() {
     let cartHtml = '';
     listCard.forEach((item, index) => {
@@ -205,6 +212,7 @@ function renderCart() {
         `;
     });
     document.querySelector('.listCard').innerHTML = cartHtml;
+
 
     document.querySelectorAll('.quantity-change').forEach(button => {
         button.addEventListener('click', () => {
