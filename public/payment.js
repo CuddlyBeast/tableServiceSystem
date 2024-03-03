@@ -1,3 +1,4 @@
+// Displaying only one radio input depending on which is selected
 const deliveryOption = document.getElementById('delivery');
 const tableOption = document.getElementById('table');
 const addressInput = document.querySelector('.address-input');
@@ -20,7 +21,7 @@ tableOption.addEventListener('change', () => {
     }
 });
 
-
+// Visuals for the card and rotation
 document.querySelector('.card-number-input').oninput = () => {
     document.querySelector('.card-number-box').innerText = document.querySelector('.card-number-input').value;
 }
@@ -53,19 +54,19 @@ document.querySelector('.cvv-input').oninput = () => {
 
 
 
+
 document.addEventListener('DOMContentLoaded', function() {
     const checkoutForm = document.querySelector('form')
     const addressInput = document.getElementById('address');
     const tableNumberInput = document.getElementById('table-number');
     const totalPrice = localStorage.getItem('totalPrice');
 
+    // Generate the total price that was within the cart
     if (totalPrice) {
-        // Display the total price wherever needed on the page
         document.getElementById('totalPriceContainer').innerText = `Total (including vat): $${totalPrice}`;
     }
 
-
-        // Example of retrieving cart information on the payment page
+    // Reintroduce the cart items so the user can confirm what they are purchasing
     const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
     if (storedCartItems) {
             let cartHtml = '';
@@ -85,29 +86,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
+    // Form submitting each ordered item seperately with the necessary information and the order number and user id to group them
     checkoutForm.addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
 
-        // Get the values of the selected radio button
         const service = document.querySelector('input[name="service"]:checked').value;
 
         const token = localStorage.getItem('token');
 
 
         try {
-            // Use Promise.all to send multiple requests asynchronously
             const orderResponses = await Promise.all(storedCartItems.map(async item => {
-                // Create the JSON object containing only the desired fields for the current item
                 const jsonData = {
                     menu_id: item.id,
                     qty: item.quantity,
                     price: item.price,
-                    // Add either table number or address based on the selected service
                     ...(service === 'delivery' ? { address: addressInput.value } : { table_num: tableNumberInput.value }),
                 };
 
-             
-                // Send POST request to backend for the current item
+
                 const response = await fetch('http://localhost:3000/api/order', {
                     method: 'POST',
                     body: JSON.stringify(jsonData),
@@ -117,63 +114,53 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });           
     
-                // Handle response
                 const data = await response.json();
                 if (!response.ok) {
-                    // Throw an error if request failed
                     throw new Error(`Failed to place order for item: ${item.id}`);
                 }
     
-                // Log success message
                 console.log(`Order placed successfully for item: ${item.id}`);
 
                 return data.order.order_num;
             }));
 
-    
             if (orderResponses.every(orderNum => orderNum)) {
-                // Use the order number from the first item to confirm the order
                 const firstItemOrderId = orderResponses[0];
                 
-                // Call fetchConfirmOrder once after all orders have been placed
                 await fetchConfirmOrder(firstItemOrderId, token);
         
-                // If all requests succeed, display success message and redirect
                 displayMessage('Purchase successful!', true);
                 setTimeout(() => {
                     window.location.href = '/menu';
                 }, 3000);
             } else {
-                // Handle error if any order was not successfully placed
                 throw new Error('Some orders were not placed successfully.');
             }
         } catch (error) {
-            // Handle error
             console.error('Registration Error:', error);
             displayMessage('Purchase failed', false);
         }
     }); 
     
+    // Same display message function present in authentication.html to inform user of success or failure
     function displayMessage(message, isSuccess) {
         const messageContainer = document.getElementById('registration-message');
         messageContainer.textContent = message;
 
         if (isSuccess) {
-            messageContainer.style.color = 'green'; 
+            messageContainer.style.color = 'var(--primaryColor)'; 
         } else {
-            messageContainer.style.color = 'red'; 
+            messageContainer.style.color = 'rgba(211, 8, 8, 0.568)'; 
         }
     }
 
-
+    // Cannot actually authenticate and transfer money from a card so this put request simulates this by updating the database with the users masked card number
     async function fetchConfirmOrder(orderId, token) {
         const cardNumber = document.querySelector('.card-number-input').value;
 
         const cardData = {
             paid_with: cardNumber,
         }
-
-        console.log(cardData)
 
         try {
             const response = await fetch(`http://localhost:3000/api/order/payment/${orderId}`, {
@@ -201,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    // Listen for changes in radio button selection
+    // Disables the unselected radio button so that they can both have a required attribute 
     document.querySelectorAll('input[type=radio][name=service]').forEach(function(radio) {
         radio.addEventListener('change', function() {
             if (this.value === 'delivery') {
@@ -213,9 +200,5 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
-    // // Initially disable the table number input by default
-    // tableNumberInput.setAttribute('disabled', 'disabled');
-
 });
 

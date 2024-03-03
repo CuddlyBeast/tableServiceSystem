@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
         messageContainer.textContent = message;
 
         if (isSuccess) {
-            messageContainer.style.color = 'green'; 
+            messageContainer.style.color = 'var(--primaryColor)'; 
         } else {
-            messageContainer.style.color = 'red'; 
+            messageContainer.style.color = 'rgba(211, 8, 8, 0.568)'; 
         }
     }
 
