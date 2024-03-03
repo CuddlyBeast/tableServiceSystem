@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    // Form submitting each ordered item seperately with the necessary information and the order number and user id to group them
+    // Submitting each ordered item seperately with the necessary information and the order number and user id to group them
     checkoutForm.addEventListener('submit', async function(event) {
         event.preventDefault(); 
 

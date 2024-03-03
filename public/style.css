@@ -927,6 +927,23 @@ header .shopping span {
     margin-right: 5px; /* Adjust the spacing between the icon and text */
 }
 
+/* Orders Page */
+
+.order-section{
+    height: 80vH;
+}
+
+.order-history{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.order-section .order-nav .order-history .order-info{
+
+}
+
 
 /* mobile view */
 @media screen and (max-width:640px) {

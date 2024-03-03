@@ -1,15 +1,12 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <title>Contact Page</title>
+    <title>Table Service</title>
 </head>
-<body id="contact-body">
-
-
+<body>
     <div class="sidebar">
         <h1 class="logo">Glutton For Grub</h1>
         <div class="sidebar-menus">
@@ -25,28 +22,22 @@
         </div>
     </div>
 
-    <ion-icon id="contact-toggle" class="menu-toggle" name="menu-outline"></ion-icon>
-
-    <div class="contact-container">
-        <form action="https://api.web3forms.com/submit" method="POST" class="contact-right">
-            <div class="contact-right-title">
-                <h2>Get in touch</h2>
-                <hr>
+    <section class="main order-section">
+        <div class="order-nav">
+            <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+            <div class="search">
+                <input type="text" placeholder="Find your favourites!">
+                <button class="search-btn">search</button>
             </div>
-            <input type="hidden" name="access_key" value="f242d71e-a659-4ac4-baa9-c70ccd040c58">
-            <input type="text" name="name" placeholder="Your Name" class="contact-inputs" required>
-            <input type="email" name="email" placeholder="Your Email" class="contact-inputs" required>
-            <textarea name="message" placeholder="Your Message" class="contact-inputs" required></textarea>
-            <button type="submit">Submit <img src="images/arrow_icon.png"></button>
-        </form>
-    </div>
-
-    <div class="far-img">
-        <img src="images/bread.png" alt="">
-    </div>
+            
+            <div class="main-menus order-history">
+                
+            </div>
+        </div>
+    </section>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="contact.js"></script>
+    <script src="order.js"></script>
 </body>
 </html>
