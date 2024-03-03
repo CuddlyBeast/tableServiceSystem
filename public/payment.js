@@ -54,10 +54,14 @@ document.querySelector('.cvv-input').oninput = () => {
 
 
 document.addEventListener('DOMContentLoaded', function() {
+    const checkoutForm = document.querySelector('form')
+    const addressInput = document.getElementById('address');
+    const tableNumberInput = document.getElementById('table-number');
     const totalPrice = localStorage.getItem('totalPrice');
+
     if (totalPrice) {
         // Display the total price wherever needed on the page
-        document.getElementById('totalPriceContainer').innerText = `Total (including vat): $${totalPrice.toLocaleString()}`;
+        document.getElementById('totalPriceContainer').innerText = `Total (including vat): $${totalPrice}`;
     }
 
 
@@ -79,5 +83,139 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         document.querySelector('.listCard').innerHTML = cartHtml;
     }
+
+
+    checkoutForm.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get the values of the selected radio button
+        const service = document.querySelector('input[name="service"]:checked').value;
+
+        const token = localStorage.getItem('token');
+
+
+        try {
+            // Use Promise.all to send multiple requests asynchronously
+            const orderResponses = await Promise.all(storedCartItems.map(async item => {
+                // Create the JSON object containing only the desired fields for the current item
+                const jsonData = {
+                    menu_id: item.id,
+                    qty: item.quantity,
+                    price: item.price,
+                    // Add either table number or address based on the selected service
+                    ...(service === 'delivery' ? { address: addressInput.value } : { table_num: tableNumberInput.value }),
+                };
+
+             
+                // Send POST request to backend for the current item
+                const response = await fetch('http://localhost:3000/api/order', {
+                    method: 'POST',
+                    body: JSON.stringify(jsonData),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });           
+    
+                // Handle response
+                const data = await response.json();
+                if (!response.ok) {
+                    // Throw an error if request failed
+                    throw new Error(`Failed to place order for item: ${item.id}`);
+                }
+    
+                // Log success message
+                console.log(`Order placed successfully for item: ${item.id}`);
+
+                return data.order.order_num;
+            }));
+
+    
+            if (orderResponses.every(orderNum => orderNum)) {
+                // Use the order number from the first item to confirm the order
+                const firstItemOrderId = orderResponses[0];
+                
+                // Call fetchConfirmOrder once after all orders have been placed
+                await fetchConfirmOrder(firstItemOrderId, token);
+        
+                // If all requests succeed, display success message and redirect
+                displayMessage('Purchase successful!', true);
+                setTimeout(() => {
+                    window.location.href = '/menu';
+                }, 3000);
+            } else {
+                // Handle error if any order was not successfully placed
+                throw new Error('Some orders were not placed successfully.');
+            }
+        } catch (error) {
+            // Handle error
+            console.error('Registration Error:', error);
+            displayMessage('Purchase failed', false);
+        }
+    }); 
+    
+    function displayMessage(message, isSuccess) {
+        const messageContainer = document.getElementById('registration-message');
+        messageContainer.textContent = message;
+
+        if (isSuccess) {
+            messageContainer.style.color = 'green'; 
+        } else {
+            messageContainer.style.color = 'red'; 
+        }
+    }
+
+
+    async function fetchConfirmOrder(orderId, token) {
+        const cardNumber = document.querySelector('.card-number-input').value;
+
+        const cardData = {
+            paid_with: cardNumber,
+        }
+
+        console.log(cardData)
+
+        try {
+            const response = await fetch(`http://localhost:3000/api/order/payment/${orderId}`, {
+                method: 'PUT',
+                body: JSON.stringify(cardData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            const data = await response.json();
+            if (response.ok) {
+                // Handle successful response
+                console.log(data); // Use data as needed
+            } else {
+                // Handle error response
+                console.error('Error fetching confirm order data');
+                throw new Error({ message: 'Payment Confirmation for Order failed'})
+            }
+        } catch (error) {
+            // Handle fetch error
+            console.error('Fetch Error:', error);
+        }
+    }
+
+
+    // Listen for changes in radio button selection
+    document.querySelectorAll('input[type=radio][name=service]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (this.value === 'delivery') {
+                addressInput.removeAttribute('disabled');
+                tableNumberInput.setAttribute('disabled', 'disabled');
+            } else if (this.value === 'table') {
+                tableNumberInput.removeAttribute('disabled');
+                addressInput.setAttribute('disabled', 'disabled');
+            }
+        });
+    });
+
+    // // Initially disable the table number input by default
+    // tableNumberInput.setAttribute('disabled', 'disabled');
+
 });
 

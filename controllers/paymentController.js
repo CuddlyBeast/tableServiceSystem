@@ -3,7 +3,7 @@ const validator = require('validator');
 
 const confirmOrder = async (req, res) => {
     try {
-        const { payment_method } = req.body;
+        const { paid_with } = req.body;
         const userId = req.user.id;
         const orderId = req.params.id;
 
@@ -11,7 +11,7 @@ const confirmOrder = async (req, res) => {
             return res.status(400).send({ error: 'Invalid order ID'});
           }
 
-        const last4Digits = payment_method.slice(-4);
+        const last4Digits = paid_with.slice(-4);
         const maskedPaymentMethod = `card ending in *${last4Digits}`;
 
         const [numUpdatedRows, updatedOrders] = await Order.update(

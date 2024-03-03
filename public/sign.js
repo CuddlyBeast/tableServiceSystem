@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Redirect to index.html upon successful login
                 window.location.href = '/index.html';
             } else {
-                throw new Error('Login failed');
+                displayMessage(`Login failed`, false);
             }
         } catch (error) {
             // Handle error
