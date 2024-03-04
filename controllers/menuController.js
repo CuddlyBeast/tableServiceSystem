@@ -9,4 +9,14 @@ const viewMenu = async (req, res) => {
     }
 }
 
-module.exports = { viewMenu } ;
+const viewItem = async (req, res) => {
+    try {
+        const itemName = req.query.name
+        const menu = await Menu.findOne({ where: {name: itemName} });
+        res.send(menu);
+    } catch (error) {
+        res.status(500).send({ error: "Internal Server Error" });
+    }
+}
+
+module.exports = { viewMenu, viewItem } ;

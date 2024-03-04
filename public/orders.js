@@ -43,10 +43,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         groupedOrders.forEach(orderGroup => {
                const firstOrder = orderGroup[0]; // Get the first order in the group
                let totalPrice = 0;
+               let orderInfoHtml = '';
                
                orderHistoryHtml += `
                <div class="order-info">
-                   <h2 class="main-title">Order Number: ${firstOrder.order_num} <ion-icon name="trash-outline"></ion-icon></h2>
+                   <h2 class="main-title">Order Number: ${firstOrder.order_num}   <button class="delete-order" data-order-id="${firstOrder.order_num}"><ion-icon name="trash-outline"></ion-icon></button></h2>
                    <p>Time of Purchase: ${firstOrder.updated_at.slice(11, 19)} | ${firstOrder.updated_at.slice(0, 10)}</p>
                    <p>Paid With: ${firstOrder.paid_with}</p>
            `;
@@ -97,6 +98,28 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         document.querySelector('.order-history').innerHTML = orderHistoryHtml;
 
+
+        // Delete Order Button
+        document.querySelectorAll('.delete-order').forEach(button => {
+            button.addEventListener('click', async () => {
+                const orderId = button.dataset.orderId;
+                try {
+                    const response = await fetch(`http://localhost:3000/api/order/delete/${orderId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        }
+                    });
+                    if (!response.ok) {
+                        throw new Error('Failed to delete order');
+                    }
+                    location.reload();
+                } catch (error) {
+                    console.error('Error deleting order:', error);
+                }
+            });
+        });
+
     } catch (error) {
         console.error('Error fetching orders:', error);
     }
@@ -112,5 +135,10 @@ function groupOrdersByOrderNumber(orders) {
         }
         groupedOrders[order.order_num].push(order);
     });
-    return Object.values(groupedOrders);
+
+    const sortedOrderNumbers = Object.keys(groupedOrders).sort((a, b) => b - a);
+
+    const descendingGroupedOrders = sortedOrderNumbers.map(orderNum => groupedOrders[orderNum]);
+
+    return descendingGroupedOrders;
 }

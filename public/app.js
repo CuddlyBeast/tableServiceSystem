@@ -72,6 +72,8 @@ closeShopping.addEventListener('click', () => {
 
 document.addEventListener('DOMContentLoaded', async function() {
     const logout = document.getElementById('logout');
+    const searchBtn = document.querySelector('.search-btn');
+    const searchBar = document.querySelector('.search input');
 
     try {
         const response = await fetch('http://localhost:3000/api/menu');
@@ -110,12 +112,36 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     });
     
+    // Search Bar Function
+    searchBtn.addEventListener('click', async function() {
+        try {
+            const searchText = searchBar.value.trim().toLowerCase();
+            if (searchText !== '') {
+                const response = await fetch(`http://localhost:3000/api/menu?search=${searchText}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch search results');
+                }
+                const searchData = await response.json();
+                displayTableServiceData(searchData, searchText);
+            } else {
+                const response = await fetch('http://localhost:3000/api/menu');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const data = await response.json();
+                displayTableServiceData(data);
+            }
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+        }
+    });
 
 });
 
-function displayTableServiceData(data) {
+function displayTableServiceData(data, searchText = '') {
     let tableDataHtml = '';
     let detailCardsHtml = '';
+
     data.forEach(item => {
         tableDataHtml += `
             <div class="highlight-card">
@@ -127,6 +153,10 @@ function displayTableServiceData(data) {
                 </div>
             </div>`;
     });
+
+    if (searchText !== '') {
+        data = data.filter(item => item.name.toLowerCase().includes(searchText));
+    }
 
     data.forEach(item => {
         detailCardsHtml += `

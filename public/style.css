@@ -46,13 +46,14 @@ body {
 .sidebar-menus a,
 .sidebar-logout a {
     padding: 5% 8%;
-    margin: 0.5rem 0;
+    margin: 2rem 0;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 1rem;
     text-decoration: none;
     color: var(--whiteColor);
+    font-size: 19px;
 }
 
 .sidebar-menus a ion-icon,
@@ -124,6 +125,10 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.profile .user{
+    cursor: default;
 }
 
 
@@ -430,6 +435,7 @@ header .shopping span {
 }
 
 .detail-card {
+    max-width: 400px;
     min-height: 280px;
     height: 100%;
     background-color: var(--whiteColor);
@@ -467,8 +473,10 @@ header .shopping span {
     color: var(--primaryColor);
 }
 
-.detail-favourites {
+.detail-favourites{
     font-size: 24px;
+    background-color: var(--softGreenColor);
+    color: var(--blackColor);
 }
 
 .detail-card:hover {
@@ -945,6 +953,16 @@ header .shopping span {
 
 .order-section .order-nav .order-history .order-total{
     font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-order{
+    font-size: 18px;
+    background-color: var(--softGreenColor);
+    color: var(--blackColor);
+    cursor: pointer;
 }
 
 

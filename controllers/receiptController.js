@@ -1,3 +1,5 @@
+// Turned out to be unnecessary
+
 const { Order, sequelize } = require("../models");
 const validator = require('validator');
 
