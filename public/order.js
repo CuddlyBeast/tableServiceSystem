@@ -1,3 +1,22 @@
+// Toggle for Sidebar
+
+const mobile = document.querySelector('.menu-toggle');
+const mobileLink = document.querySelector('.sidebar');
+
+mobile.addEventListener("click", function(){
+    mobile.classList.toggle("is-active");
+    mobileLink.classList.toggle("active");
+});
+
+mobileLink.addEventListener("click", function(){
+    const menuBars = document.querySelector(".is-active");
+    if(window.innerWidth <= 768 && menuBars) {
+        mobile.classList.toggle("is-active");
+        mobileLink.classList.toggle("active");
+    }
+});
+
+
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         const token = localStorage.getItem('token')
@@ -30,10 +49,21 @@ document.addEventListener('DOMContentLoaded', async function() {
                    <h2 class="main-title">Order Number: ${firstOrder.order_num} <ion-icon name="trash-outline"></ion-icon></h2>
                    <p>Time of Purchase: ${firstOrder.updated_at.slice(11, 19)} | ${firstOrder.updated_at.slice(0, 10)}</p>
                    <p>Paid With: ${firstOrder.paid_with}</p>
-                   <p>Table Number: ${firstOrder.table_num}</p>
-                   <p>Address: ${firstOrder.address}</p>
-               </div>
            `;
+
+          
+        if (firstOrder.table_num !== 0) {
+            orderInfoHtml = `<p>Table Number: ${firstOrder.table_num}</p>`;
+        }
+        
+        
+        if (firstOrder.address.toLowerCase() !== 'n/a') {
+            orderInfoHtml = `<p>Address: ${firstOrder.address}</p>`;
+        }
+
+        orderInfoHtml += `</div>`;
+        orderHistoryHtml += orderInfoHtml;
+
             
             // Iterate over each item in the order group
             orderGroup.forEach(order => {
@@ -49,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         <div><img class="highlight-img" src="${itemImage}"/></div>
                         <p>Item Name: ${itemName}</p>
                         <p>Quantity: ${order.qty}</p>
-                        <p>Price: $${parseFloat(order.price).toFixed(2)}</p>
+                        <p>Price: $${parseFloat(order.price * order.qty).toFixed(2)}</p>
                     </div>
                 `;
 
@@ -59,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             orderHistoryHtml += `
             <div class="order-total">
-                <p>Total Price: $${totalPrice.toFixed(2)}</p>
+                <p><strong>Total Price: $${totalPrice.toFixed(2)}</strong></p>
             </div>
             <hr class="divider">
             `;

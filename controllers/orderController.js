@@ -11,7 +11,7 @@ const placeOrder = async (req, res) => {
             order: [['order_num', 'DESC']],
         })
 
-        const newOrderNum = latestOrder ? parseInt(latestOrder.order_num, 10) + 1 : 1; // order_num originally set as a string
+        const newOrderNum = latestOrder ? parseInt(latestOrder.order_num, 10) + 1 : 1; 
 
         const newOrder = await Order.create({
             order_num: newOrderNum,

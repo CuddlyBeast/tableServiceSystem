@@ -935,13 +935,16 @@ header .shopping span {
 
 .order-history{
     margin-top: 15px;
-    display: flex;
-    flex-direction: column;
+
 }
 
 
-.order-section .order-nav .order-history .order-info{
+.order-section .order-nav .order-history .order-item{
+    margin: 15px 0;
+}
 
+.order-section .order-nav .order-history .order-total{
+    font-size: 26px;
 }
 
 
