@@ -33,15 +33,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         const menuResponse = await fetch('http://localhost:3000/api/menu');
         const menuData = await menuResponse.json();
 
-
         const groupedOrders = groupOrdersByOrderNumber(orders);
 
-        // Clear previous content
         let orderHistoryHtml = '';
 
         // Populate orders in the HTML
         groupedOrders.forEach(orderGroup => {
-               const firstOrder = orderGroup[0]; // Get the first order in the group
+               const firstOrder = orderGroup[0];
                let totalPrice = 0;
                let orderInfoHtml = '';
                
@@ -66,12 +64,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         orderHistoryHtml += orderInfoHtml;
 
             
-            // Iterate over each item in the order group
             orderGroup.forEach(order => {
-                // Find the corresponding item in the menu data
                 const menuItem = menuData.find(item => item.id === order.menu_id);
 
-                // Display item information
                 const itemName = menuItem ? menuItem.name : 'Unknown Item';
                 const itemImage = menuItem ? menuItem.image : 'Unknown Image';
                 
@@ -84,7 +79,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                     </div>
                 `;
 
-                  // Accumulate total price
                   totalPrice += parseFloat(order.price) * order.qty;
             });
 
@@ -129,9 +123,9 @@ document.addEventListener('DOMContentLoaded', async function() {
            const currentTime = new Date().getTime();
            const timeElapsed = currentTime - orderCreationTime;
 
-           // Set the timeout to hide the delete button after one minute since the order was made
+           // Set the timeout to hide the delete button after five minutes since the order was made
            const timeLimit = 300000;
-           const timeRemaining = Math.max(timeLimit - timeElapsed, 0); // Ensure timeRemaining is not negative
+           const timeRemaining = Math.max(timeLimit - timeElapsed, 0);
            setTimeout(() => {
                button.style.display = 'none';
            }, timeRemaining);
@@ -144,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 
-// Function to group orders by order number
+// Function to group orders by order number DESC
 function groupOrdersByOrderNumber(orders) {
     const groupedOrders = {};
     orders.forEach(order => {

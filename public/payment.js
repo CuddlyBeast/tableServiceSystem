@@ -174,15 +174,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
             if (response.ok) {
-                // Handle successful response
-                console.log(data); // Use data as needed
+                console.log(data); 
             } else {
-                // Handle error response
                 console.error('Error fetching confirm order data');
                 throw new Error({ message: 'Payment Confirmation for Order failed'})
             }
         } catch (error) {
-            // Handle fetch error
             console.error('Fetch Error:', error);
         }
     }

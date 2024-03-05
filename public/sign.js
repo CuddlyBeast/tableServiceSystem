@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Login
     const handleLogin = async (email, password) => {
         try {
-            // Send POST request to backend
             const response = await fetch('http://localhost:3000/api/signin', {
                 method: 'POST',
                 body: JSON.stringify({ email, password }),
@@ -32,34 +31,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // Check if response is successful
             if (response.ok) {
-                // Parse the response JSON
                 const data = await response.json();
 
-                // Store the JWT token securely (e.g., in local storage)
                 localStorage.setItem('token', data.token);
 
-                // Redirect to index.html upon successful login
                 window.location.href = '/index.html';
             } else {
                 displayMessage(`Login failed`, false);
             }
         } catch (error) {
-            // Handle error
             console.error('Login Error:', error);
         }
     };
 
-    // Add event listener for login form submission
     loginForm.addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
 
-        // Get email and password from the form
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
-        // Call the handleLogin function
         handleLogin(email, password);
     });
 
@@ -67,9 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Registration
     registrationForm.addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
         
-        // Get form data
         const formData = new FormData(registrationForm);
         const jsonData = {};
         formData.forEach((value, key) => {
@@ -77,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     
         try {
-            // Send POST request to backend
             const response = await fetch('http://localhost:3000/api/signup', {
                 method: 'POST',
                 body: JSON.stringify(jsonData),
@@ -86,20 +75,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
     
-            // Handle response
             const data = await response.json();
             if (response.ok) {
-                // Registration successful
                 displayMessage('Registration successful!', true);
                 setTimeout(() => {
                     window.location.href = '/';
                 }, 3000);
             } else {
-                // Registration failed
                 displayMessage(`Registration failed`, false);
             }
         } catch (error) {
-            // Handle error
             console.error('Registration Error:', error);
         }
     });  

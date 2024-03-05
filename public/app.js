@@ -81,12 +81,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         filterCard.addEventListener('click', async function() {
             const filterType = filterCard.querySelector('p').textContent;
 
-            // Remove active class from all filter cards
         filterCards.forEach(card => {
                 card.classList.remove('active');
             });
 
-            // Add active class to the clicked filter card
         filterCard.classList.add('active');
 
         try {
@@ -124,26 +122,20 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     // Logout
-
     logout.addEventListener('click', async function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
     
         try {
-            // Send GET request to logout endpoint
             const response = await fetch('http://localhost:3000/api/logout', {
                 method: 'GET'
             });
     
-            // Check if response is successful
             if (response.ok) {
-                // Redirect to index.html upon successful logout
                 window.location.href = "/";
             } else {
-                // Handle logout failure
                 throw new Error('Logout failed');
             }
         } catch (error) {
-            // Handle error
             console.error('Logout Error:', error);
         }
     });
@@ -314,5 +306,3 @@ onClickTotal.addEventListener('click', () => {
     window.location.href = '/payment';
 })
 
-
-// Transfer Total Sum of Cart to Payment Page (perhaps with the item id and quantity so that upon purchase the order database will update)
