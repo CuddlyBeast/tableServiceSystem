@@ -74,6 +74,42 @@ document.addEventListener('DOMContentLoaded', async function() {
     const logout = document.getElementById('logout');
     const searchBtn = document.querySelector('.search-btn');
     const searchBar = document.querySelector('.search input');
+    const filterCards = document.querySelectorAll('.filter-card');
+
+    // Add click event listener to each filter card
+    filterCards.forEach(filterCard => {
+        filterCard.addEventListener('click', async function() {
+            const filterType = filterCard.querySelector('p').textContent;
+
+            // Remove active class from all filter cards
+        filterCards.forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Add active class to the clicked filter card
+        filterCard.classList.add('active');
+
+        try {
+            const response = await fetch('http://localhost:3000/api/menu');
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+
+            let filteredData;
+            if (filterType === 'All Menus') {
+                filteredData = data;
+            } else {
+                filteredData = data.filter(item => item.type.toLowerCase() === filterType.toLowerCase());
+            }
+            
+            displayTableServiceData(filteredData);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+});
+
 
     try {
         const response = await fetch('http://localhost:3000/api/menu');

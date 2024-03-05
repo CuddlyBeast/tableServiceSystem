@@ -926,26 +926,51 @@ header .shopping span {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    color: var(--primaryColor); /* Change the color as needed */
+    color: var(--primaryColor);
     font-size: 20px;
     margin-top: 10px;
 }
 
 .return-button ion-icon {
-    margin-right: 5px; /* Adjust the spacing between the icon and text */
+    margin-right: 5px; 
 }
 
 /* Orders Page */
 
 .order-section{
     height: 80vH;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.order-info {
+    margin-bottom: 20px; 
+}
+
+
+.order-item img {
+    width: 100px;
+    height: 100px; 
+    object-fit: cover;  
+    border-radius: 4px; 
+}
+
+.order-section::-webkit-scrollbar {
+    width: 20px; 
+}
+
+.order-section::-webkit-scrollbar-thumb {
+    background-color: var(--primaryColor);
+    border-radius: 5px;
+}
+
+.order-section::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondaryColor); 
 }
 
 .order-history{
     margin-top: 15px;
-
 }
-
 
 .order-section .order-nav .order-history .order-item{
     margin: 15px 0;
@@ -956,6 +981,7 @@ header .shopping span {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--primaryColor);
 }
 
 .delete-order{
@@ -963,6 +989,10 @@ header .shopping span {
     background-color: var(--softGreenColor);
     color: var(--blackColor);
     cursor: pointer;
+}
+
+.delete-order:hover {
+    background-color: rgba(211, 8, 8, 0.568);
 }
 
 

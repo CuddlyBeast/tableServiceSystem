@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Delete Order Button
         document.querySelectorAll('.delete-order').forEach(button => {
             button.addEventListener('click', async () => {
-                const orderId = button.dataset.orderId;
+                const orderId = parseInt(button.dataset.orderId);
                 try {
                     const response = await fetch(`http://localhost:3000/api/order/delete/${orderId}`, {
                         method: 'DELETE',
@@ -118,7 +118,25 @@ document.addEventListener('DOMContentLoaded', async function() {
                     console.error('Error deleting order:', error);
                 }
             });
-        });
+
+           // Get the order creation time
+           const orderId = parseInt(button.dataset.orderId);
+           const order = orders.find(order => order.order_num === orderId);
+           const orderCreationTime = new Date(order.updated_at).getTime();
+
+
+           // Calculate the time elapsed since the order was made
+           const currentTime = new Date().getTime();
+           const timeElapsed = currentTime - orderCreationTime;
+
+           // Set the timeout to hide the delete button after one minute since the order was made
+           const timeLimit = 300000;
+           const timeRemaining = Math.max(timeLimit - timeElapsed, 0); // Ensure timeRemaining is not negative
+           setTimeout(() => {
+               button.style.display = 'none';
+           }, timeRemaining);
+       });
+
 
     } catch (error) {
         console.error('Error fetching orders:', error);
