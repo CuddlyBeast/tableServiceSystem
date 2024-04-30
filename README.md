@@ -42,7 +42,7 @@ The goal was to create a minimalistic application That would enable users to ord
     2. The order specified in the url params will be deleted.
 
 
-### License
+### Copyright
 
-**GPL license**
+**Copyright 2024, Jonathan Cuddy, All rights reserved.**
 :smiley:
