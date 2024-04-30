@@ -69,7 +69,6 @@ closeShopping.addEventListener('click', () => {
 });
 
 // Fetching data from API
-
 document.addEventListener('DOMContentLoaded', async function() {
     const logout = document.getElementById('logout');
     const searchBtn = document.querySelector('.search-btn');

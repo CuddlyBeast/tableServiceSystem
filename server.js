@@ -21,6 +21,7 @@ app.use(
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "https://unpkg.com/", "https://code.jquery.com"],
         connectSrc: ["'self'", "https://unpkg.com/"],
+        formAction: ["'self'", "https://api.web3forms.com"]
       },
     })
   );
@@ -34,8 +35,6 @@ app.use(session({
     cookie: { maxAge: 7280000, httpOnly: true, sameSite: 'none', secure: false },
     resave: false,
     saveUninitialized: false,
-    sameSite: 'none',
-    secure: false,
     store,
 }));
 
