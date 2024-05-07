@@ -1,3 +1,5 @@
+const BASE_URL = "https://glutton4grub-d79cf866d83c.herokuapp.com/";
+
 // Toggle for Sidebar
 
 const mobile = document.querySelector('.menu-toggle');
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const token = localStorage.getItem('token')
 
 
-        const response = await fetch('http://localhost:3000/api/order/history', {
+        const response = await fetch(`${BASE_URL}api/order/history`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }); 
         const orders = await response.json();
         
-        const menuResponse = await fetch('http://localhost:3000/api/menu');
+        const menuResponse = await fetch(`${BASE_URL}api/menu`);
         const menuData = await menuResponse.json();
 
         const groupedOrders = groupOrdersByOrderNumber(orders);
@@ -98,7 +100,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             button.addEventListener('click', async () => {
                 const orderId = parseInt(button.dataset.orderId);
                 try {
-                    const response = await fetch(`http://localhost:3000/api/order/delete/${orderId}`, {
+                    const response = await fetch(`${BASE_URL}api/order/delete/${orderId}`, {
                         method: 'DELETE',
                         headers: {
                             'Authorization': `Bearer ${token}`,

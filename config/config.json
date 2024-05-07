@@ -17,11 +17,7 @@
     },
     "production": {
       "dialect": "postgres",
-      "host": "localhost",
-      "username": "postgres",
-      "password": "postgres",
-      "database": "table_service",
-      "port": 5432
+      "use_env_variable": "DATABASE_URL"
     }
   }
   

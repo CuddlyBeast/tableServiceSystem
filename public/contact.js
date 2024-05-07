@@ -1,3 +1,5 @@
+const BASE_URL = "https://glutton4grub-d79cf866d83c.herokuapp.com/";
+
 const mobile = document.querySelector('.menu-toggle');
 const mobileLink = document.querySelector('.sidebar');
 
@@ -19,7 +21,7 @@ logout.addEventListener('click', async function(event) {
     event.preventDefault();
 
     try {
-        const response = await fetch('http://localhost:3000/api/logout', {
+        const response = await fetch(`${BASE_URL}api/logout`, {
             method: 'GET'
         });
 

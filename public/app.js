@@ -1,3 +1,5 @@
+const BASE_URL = "https://glutton4grub-d79cf866d83c.herokuapp.com/";
+
 // Toggle for Sidebar
 
 const mobile = document.querySelector('.menu-toggle');
@@ -87,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         filterCard.classList.add('active');
 
         try {
-            const response = await fetch('http://localhost:3000/api/menu');
+            const response = await fetch(`${BASE_URL}api/menu`);
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
@@ -109,7 +111,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 
     try {
-        const response = await fetch('http://localhost:3000/api/menu');
+        const response = await fetch(`${BASE_URL}api/menu`);
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
@@ -125,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         event.preventDefault(); 
     
         try {
-            const response = await fetch('http://localhost:3000/api/logout', {
+            const response = await fetch(`${BASE_URL}api/logout`, {
                 method: 'GET'
             });
     
@@ -144,14 +146,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         try {
             const searchText = searchBar.value.trim().toLowerCase();
             if (searchText !== '') {
-                const response = await fetch(`http://localhost:3000/api/menu?search=${searchText}`);
+                const response = await fetch(`${BASE_URL}api/menu?search=${searchText}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch search results');
                 }
                 const searchData = await response.json();
                 displayTableServiceData(searchData, searchText);
             } else {
-                const response = await fetch('http://localhost:3000/api/menu');
+                const response = await fetch(`${BASE_URL}api/menu`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }

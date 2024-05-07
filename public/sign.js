@@ -1,3 +1,5 @@
+const BASE_URL = "https://glutton4grub-d79cf866d83c.herokuapp.com/";
+
 // Swap between Sign-in And Sign-up Form
 
 const wrapper = document.querySelector('.wrapper')
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Login
     const handleLogin = async (email, password) => {
         try {
-            const response = await fetch('http://localhost:3000/api/signin', {
+            const response = await fetch(`${BASE_URL}api/signin`, {
                 method: 'POST',
                 body: JSON.stringify({ email, password }),
                 headers: {
@@ -67,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     
         try {
-            const response = await fetch('http://localhost:3000/api/signup', {
+            const response = await fetch(`${BASE_URL}api/signup`, {
                 method: 'POST',
                 body: JSON.stringify(jsonData),
                 headers: {
