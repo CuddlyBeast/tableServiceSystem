@@ -32,7 +32,7 @@ const store = new session.MemoryStore();
 
 app.use(session({
     secret: 'hkdlspairjtmchswgqusdfpgkwpdfu',
-    cookie: { maxAge: 7280000, httpOnly: true, sameSite: 'none', secure: false },
+    cookie: { maxAge: 7280000, httpOnly: true, sameSite: 'none', secure: true },
     resave: false,
     saveUninitialized: false,
     store,
