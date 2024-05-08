@@ -4,7 +4,8 @@
   "description": "Sign-up/in, view menu, add to order, purchase, receive receipt",
   "main": "server.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
