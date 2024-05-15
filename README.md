@@ -9,7 +9,7 @@ ___
 ## Project Description 
 
 This project was inspired by the many table service appplications that were placed in high demand throughout the COVID pandemic. 
-The goal was to create a minimalistic application That would enable users to order items from their table. 
+The goal was to create a minimalistic application That would enable users to order items from their table or request food delivery to their address. In order to use the application the user has to be registered and signed in. The user can filter the items on menu based on the type of item it is; e.g. pizza or wine and can also use the search bar to look for a specific item. These items can be added to the checkout cart where the price will be calculated and the user can change item quantity. The user can then click the total price button or the "Payment" button to checkout after the necessary information has been given. Order history can be viewed in the "Orders" page where the user has a 5 minute grace period to cancel and can view the order information. There is also a contact page with a working form that allows user to send an email to my personal email address mimicking customer support. After the user has completed their journey they can use the "Logout" button to terminate the session. 
 
 #### The Technologies Used: 
 - Node.js and the Express.js framework
